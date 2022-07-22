@@ -6,6 +6,11 @@ import java.util.Objects;
 import com.hopeecommerce.utils.Cnpj;
 import com.hopeecommerce.utils.Email;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter @Setter @NoArgsConstructor
 public class Ong implements Serializable{
 	private static final long serialVersionUID = 1L;
 
@@ -13,25 +18,6 @@ public class Ong implements Serializable{
 	private String name;
 	private Cnpj cnpj;
 	private Email email;
-	
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public Cnpj getCnpj() {
-		return cnpj;
-	}
-	public void setCnpj(Cnpj cnpj) {
-		this.cnpj = cnpj;
-	}
-	public Email getEmail() {
-		return email;
-	}
-	public void setEmail(Email email) {
-		this.email = email;
-	}
 	
 	@Override
 	public int hashCode() {

@@ -6,6 +6,11 @@ import java.util.Objects;
 import com.hopeecommerce.utils.Email;
 import com.hopeecommerce.utils.PhoneNumber;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter @Setter @NoArgsConstructor
 public class Client implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
@@ -13,26 +18,7 @@ public class Client implements Serializable{
 	private String name;
 	private Email email;
 	private PhoneNumber phoneNumber;
-	
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public Email getEmail() {
-		return email;
-	}
-	public void setEmail(Email email) {
-		this.email = email;
-	}
-	public PhoneNumber getPhoneNumber() {
-		return phoneNumber;
-	}
-	public void setPhoneNumber(PhoneNumber phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
-	
+		
 	@Override
 	public int hashCode() {
 		return Objects.hash(Id);

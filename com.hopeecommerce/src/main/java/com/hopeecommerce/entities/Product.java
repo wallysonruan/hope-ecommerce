@@ -3,6 +3,11 @@ package com.hopeecommerce.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter @Setter @NoArgsConstructor
 public class Product implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
@@ -11,31 +16,6 @@ public class Product implements Serializable{
 	private Double price;
 	private Integer storage;
 	private Double donationPercentage;
-	
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public Double getPrice() {
-		return price;
-	}
-	public void setPrice(Double price) {
-		this.price = price;
-	}
-	public Integer getStorage() {
-		return storage;
-	}
-	public void setStorage(Integer storage) {
-		this.storage = storage;
-	}
-	public Double getDonationPercentage() {
-		return donationPercentage;
-	}
-	public void setDonationPercentage(Double donationPercentage) {
-		this.donationPercentage = donationPercentage;
-	}
 	
 	@Override
 	public int hashCode() {

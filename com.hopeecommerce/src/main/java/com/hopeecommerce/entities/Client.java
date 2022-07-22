@@ -54,5 +54,4 @@ public class Client implements Serializable{
 	public String toString() {
 		return "Client [Id=" + Id + ", name=" + name + ", email=" + email + ", phoneNumber=" + phoneNumber + "]";
 	}
-	
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hopeecommerce.entities.Client;
+import com.hopeecommerce.requests.ClientRequest;
 
 @RestController
 @RequestMapping("clients")
@@ -24,21 +25,21 @@ public class ClientResource {
 	}
 	
 	@PostMapping
-	public void add(@RequestBody Client client) {
+	public void add(@RequestBody ClientRequest clientRequest) {
 		
 	}
 	
 	@PutMapping
-	public void update(@RequestBody Client client) {
+	public void update(@RequestBody ClientRequest clientRequest) {
 		
 	}
 	
 	@PatchMapping
-	public void alter(@RequestBody Client client) {
+	public void alter(@RequestBody ClientRequest clientRequest) {
 		
 	}
 	
-	@DeleteMapping("{id}")
+	@DeleteMapping(path = "{id}")
 	public void deleteById(@RequestParam("id") Integer id) {
 		
 	}

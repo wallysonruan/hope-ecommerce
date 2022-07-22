@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hopeecommerce.entities.Ong;
+import com.hopeecommerce.requests.OngRequest;
 
 @RestController
 @RequestMapping("ongs")
@@ -24,21 +25,21 @@ public class OngResource {
 	}
 	
 	@PostMapping
-	public void add(@RequestBody Ong ong) {
+	public void add(@RequestBody OngRequest ongRequest) {
 		
 	}
 	
 	@PutMapping
-	public void update(@RequestBody Ong ong) {
+	public void update(@RequestBody OngRequest ongRequest) {
 		
 	}
 	
 	@PatchMapping
-	public void alter(@RequestBody Ong ong) {
+	public void alter(@RequestBody OngRequest ongRequest) {
 		
 	}
 	
-	@DeleteMapping("{id}")
+	@DeleteMapping(path = "{id}")
 	public void deleteById(@RequestParam("id") Integer id) {
 		
 	}

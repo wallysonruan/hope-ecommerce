@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hopeecommerce.entities.Product;
+import com.hopeecommerce.requests.ProductRequest;
 
 @RestController
 @RequestMapping("products")
@@ -24,21 +25,21 @@ public class ProductResource {
 	}
 	
 	@PostMapping
-	public void add(@RequestBody Product product) {
+	public void add(@RequestBody ProductRequest productRequest) {
 		
 	}
 	
 	@PutMapping
-	public void update(@RequestBody Product product) {
+	public void update(@RequestBody ProductRequest productRequest) {
 		
 	}
 	
 	@PatchMapping
-	public void alter(@RequestBody Product product) {
+	public void alter(@RequestBody ProductRequest productRequest) {
 		
 	}
 	
-	@DeleteMapping("{id}")
+	@DeleteMapping(path = "{id}")
 	public void deleteById(@RequestParam("id") Integer id) {
 		
 	}

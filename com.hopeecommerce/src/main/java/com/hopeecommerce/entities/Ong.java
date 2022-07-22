@@ -9,8 +9,9 @@ import com.hopeecommerce.utils.Email;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
-@Getter @Setter @NoArgsConstructor
+@Getter @Setter @NoArgsConstructor @ToString
 public class Ong implements Serializable{
 	private static final long serialVersionUID = 1L;
 
@@ -34,11 +35,6 @@ public class Ong implements Serializable{
 			return false;
 		Ong other = (Ong) obj;
 		return Objects.equals(Id, other.Id);
-	}
-	
-	@Override
-	public String toString() {
-		return "Ong [Id=" + Id + ", name=" + name + ", cnpj=" + cnpj + ", email=" + email + "]";
 	}
 	
 }

@@ -6,8 +6,9 @@ import java.util.Objects;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
-@Getter @Setter @NoArgsConstructor
+@Getter @Setter @NoArgsConstructor @ToString
 public class Product implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
@@ -33,11 +34,4 @@ public class Product implements Serializable{
 		Product other = (Product) obj;
 		return Objects.equals(id, other.id);
 	}
-	
-	@Override
-	public String toString() {
-		return "Product [id=" + id + ", name=" + name + ", price=" + price + ", storage=" + storage
-				+ ", donationPercentage=" + donationPercentage + "]";
-	}
-	
 }

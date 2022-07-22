@@ -9,8 +9,9 @@ import com.hopeecommerce.utils.PhoneNumber;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
-@Getter @Setter @NoArgsConstructor
+@Getter @Setter @NoArgsConstructor @ToString
 public class Client implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
@@ -34,10 +35,5 @@ public class Client implements Serializable{
 			return false;
 		Client other = (Client) obj;
 		return Objects.equals(Id, other.Id);
-	}
-	
-	@Override
-	public String toString() {
-		return "Client [Id=" + Id + ", name=" + name + ", email=" + email + ", phoneNumber=" + phoneNumber + "]";
 	}
 }

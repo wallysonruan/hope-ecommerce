@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hopeecommerce.entities.Client;
@@ -37,8 +38,8 @@ public class ClientResource {
 		
 	}
 	
-	@DeleteMapping
-	public void deleteById(Integer id) {
+	@DeleteMapping("{id}")
+	public void deleteById(@RequestParam("id") Integer id) {
 		
 	}
 }

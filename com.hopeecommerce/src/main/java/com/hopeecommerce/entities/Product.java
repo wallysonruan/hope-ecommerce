@@ -5,7 +5,8 @@ import java.io.Serializable;
 import lombok.Builder;
 import lombok.Data;
 
-@Data @Builder
+@Data 
+@Builder
 public class Product implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
@@ -13,6 +14,5 @@ public class Product implements Serializable{
 	private String name;
 	private Double price;
 	private Integer storage;
-	private Double donationPercentage;
-	
+	private Double donationPercentage;	
 }

@@ -1,5 +1,6 @@
 package com.hopeecommerce.requests;
 
+import com.hopeecommerce.entities.Ong;
 import com.hopeecommerce.utils.Cnpj;
 import com.hopeecommerce.utils.Email;
 
@@ -11,4 +12,13 @@ public class OngRequest {
 	String name;
 	Cnpj cnpj;
 	Email email;
+	
+	public Ong toOng() {
+		return Ong.builder()
+				.Id(Id)
+				.name(name)
+				.cnpj(cnpj)
+				.email(email)
+				.build();
+	}
 }

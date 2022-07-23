@@ -1,20 +1,30 @@
 package com.hopeecommerce.entities;
 
-import java.io.Serializable;
-
-import com.hopeecommerce.utils.Email;
-import com.hopeecommerce.utils.PhoneNumber;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 import lombok.Builder;
 import lombok.Data;
 
+@Entity
 @Data 
 @Builder
-public class Client implements Serializable{
-	private static final long serialVersionUID = 1L;
+public class Client{
 
+	@Id
+	@Column (name="ud")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Id;
+	
+	@Column (name="name", nullable=true)
 	private String name;
-	private Email email;
-	private PhoneNumber phoneNumber;	
+	
+	@Column (name="email", nullable=true)
+	private String email;
+
+	@Column (name="phoneNumber", nullable=true)
+	private String phoneNumber;	
 }

@@ -8,17 +8,15 @@ import lombok.Data;
 
 @Data
 public class OngRequest {
-	Long Id;
 	String name;
-	Cnpj cnpj;
-	Email email;
+	String cnpj;
+	String email;
 	
 	public Ong toOng() {
 		return Ong.builder()
-				.Id(Id)
-				.name(name)
-				.cnpj(cnpj)
-				.email(email)
+				.name(this.name)
+				.cnpj(this.cnpj)
+				.email(this.email)
 				.build();
 	}
 }

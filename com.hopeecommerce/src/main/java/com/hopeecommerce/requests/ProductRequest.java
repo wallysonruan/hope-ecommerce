@@ -6,7 +6,6 @@ import lombok.Data;
 
 @Data
 public class ProductRequest {
-	Long id;
 	String name;
 	Double price;
 	Integer storage;
@@ -14,11 +13,10 @@ public class ProductRequest {
 	
 	public Product toProduct() {
 		return Product.builder()
-		.id(id)
-		.name(name)
-		.price(price)
-		.storage(storage)
-		.donationPercentage(donationPercentage)
+		.name(this.name)
+		.price(this.price)
+		.storage(this.storage)
+		.donationPercentage(this.donationPercentage)
 		.build();
 	}
 }

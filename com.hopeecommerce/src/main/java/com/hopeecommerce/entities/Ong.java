@@ -5,9 +5,10 @@ import java.io.Serializable;
 import com.hopeecommerce.utils.Cnpj;
 import com.hopeecommerce.utils.Email;
 
+import lombok.Builder;
 import lombok.Data;
 
-@Data
+@Data @Builder
 public class Ong implements Serializable{
 	private static final long serialVersionUID = 1L;
 

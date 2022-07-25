@@ -29,8 +29,8 @@ CREATE TABLE `ongs` (
 );
 CREATE TABLE `pedidos` ( 
    `id` INT NOT NULL AUTO_INCREMENT,
-   `clientes_id` INT NOT NULL,
-   `ongs_id` INT NOT NULL,
+   `cliente_id` INT NOT NULL,
+   `ong_id` INT NOT NULL,
    `data` DATE NOT NULL,
    `forma_pagamento` VARCHAR (150) NOT NULL,
    `valor_total` FLOAT NOT NULL,
@@ -40,14 +40,14 @@ CREATE TABLE `pedidos` (
     )
 );
 CREATE TABLE `inventario_pedidos_produtos` ( 
-   `produtos_id` INT NOT NULL,
-   `pedidos_id` INT NOT NULL,
+   `produto_id` INT NOT NULL,
+   `pedido_id` INT NOT NULL,
    `quantidade` INT NOT NULL
 );
 ALTER TABLE `pedidos` 
   ADD CONSTRAINT `clientes-pedidos`
   FOREIGN KEY ( 
-   `clientes_id`
+   `cliente_id`
 )   REFERENCES `clientes`( 
    `id`
 ) ;
@@ -56,7 +56,7 @@ ALTER TABLE `pedidos`
 ALTER TABLE `pedidos` 
   ADD CONSTRAINT `ongs-pedidos`
   FOREIGN KEY ( 
-   `ongs_id`
+   `ong_id`
 )   REFERENCES `ongs`( 
    `id`
 ) ;
@@ -65,7 +65,7 @@ ALTER TABLE `pedidos`
 ALTER TABLE `inventario_pedidos_produtos` 
   ADD CONSTRAINT `produtos-inventario_pedidos_produtos`
   FOREIGN KEY ( 
-   `produtos_id`
+   `produto_id`
 )   REFERENCES `produtos`( 
    `id`
 ) ;
@@ -74,7 +74,7 @@ ALTER TABLE `inventario_pedidos_produtos`
 ALTER TABLE `inventario_pedidos_produtos` 
   ADD CONSTRAINT `pedidos-inventario_pedidos_produtos`
   FOREIGN KEY ( 
-   `pedidos_id`
+   `pedido_id`
 )   REFERENCES `pedidos`( 
    `id`
 ) ;

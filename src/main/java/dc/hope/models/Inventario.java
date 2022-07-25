@@ -3,7 +3,6 @@ package dc.hope.models;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
@@ -22,11 +21,11 @@ public class Inventario {
 
     @ManyToOne
     @MapsId("produtoId")
-    Produtos produto;
+    private Produtos produto;
 
     @ManyToOne
     @MapsId("pedidoId")
-    Pedidos pedido;
+    private Pedidos pedido;
     
     private int quantidade;
 }

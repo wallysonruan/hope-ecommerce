@@ -1,29 +1,30 @@
-import java.sql.Date;
+package models;
+
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonUnwrapped;
+import javax.persistence.MapsId;
+import javax.persistence.Table;
+
+import lombok.Builder;
 
 @Entity
 @Table(name="inventario_pedidos_produtos")
 @Builder
 
 
-public class inventario {
+public class Inventario {
 
     @ManyToMany
-    @MapsId(name="produtoId")
+    @MapsId("produtoId")
     @JoinColumn(name = "produto_id")
     private Produtos produto;
 
     @ManyToMany
-    @MapsID(name="pedidoId")
+    @MapsId("pedidoId")
     @JoinColumn(name = "pedido_id")
     private Pedidos pedido;
     

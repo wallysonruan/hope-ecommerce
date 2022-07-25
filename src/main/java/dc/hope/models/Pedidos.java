@@ -1,6 +1,7 @@
 package dc.hope.models;
 
 import java.sql.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -9,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -48,6 +51,9 @@ public class Pedidos {
     @Column
     private double valor_doacao;
 
-    @OneToMany(mappedBy = "pedidos")
-    Set<Inventario> quantidade;
+    @ManyToMany
+    @JoinTable(name="inventario_pedidos_produtos",
+    joinColumns = {@JoinColumn(name="pedido_id")},
+    inverseJoinColumns = {@JoinColumn(name="produto_id")})
+    private Set<Produtos> produtos = new HashSet<Produtos>();
 }

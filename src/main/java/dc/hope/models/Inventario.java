@@ -18,17 +18,15 @@ import lombok.Builder;
 public class Inventario {
 
     @EmbeddedId
-    ChaveProdutoPedido id;
+    private ChaveProdutoPedido id = new ChaveProdutoPedido();
 
     @ManyToOne
     @MapsId("produtoId")
-    @JoinColumn(name = "produto_id")
-    private Produtos produto;
+    Produtos produto;
 
     @ManyToOne
     @MapsId("pedidoId")
-    @JoinColumn(name = "pedido_id")
-    private Pedidos pedido;
+    Pedidos pedido;
     
-    int quantidade;
+    private int quantidade;
 }

@@ -1,4 +1,4 @@
-package models;
+package dc.hope.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,21 +10,27 @@ import javax.persistence.Table;
 import lombok.Builder;
 
 @Entity
-@Table(name="ongs")
+@Table(name="clientes")
 @Builder
 
-public class Ongs {
+
+public class Clientes {
+
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column
-    private String cnpj;
+    private String cpf;
 
     @Column
     private String nome;
 
     @Column
     private String email;
+
+    @Column
+    private String telefone;
+    
 }

@@ -1,11 +1,10 @@
-package models;
+package dc.hope.models;
 
 
-import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-
+import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
 
@@ -18,16 +17,18 @@ import lombok.Builder;
 
 public class Inventario {
 
-    @ManyToMany
+    @EmbeddedId
+    ChaveProdutoPedido id;
+
+    @ManyToOne
     @MapsId("produtoId")
     @JoinColumn(name = "produto_id")
     private Produtos produto;
 
-    @ManyToMany
+    @ManyToOne
     @MapsId("pedidoId")
     @JoinColumn(name = "pedido_id")
     private Pedidos pedido;
     
-    @Column
-    private int quantidade;
+    int quantidade;
 }

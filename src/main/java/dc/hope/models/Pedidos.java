@@ -1,4 +1,4 @@
-package models;
+package dc.hope.models;
 
 import java.sql.Date;
 import java.util.Set;
@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import lombok.Builder;
 
 @Entity
 @Table(name="pedidos")

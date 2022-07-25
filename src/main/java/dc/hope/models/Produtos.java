@@ -1,36 +1,40 @@
-package models;
+package dc.hope.models;
+
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Builder;
 
 @Entity
-@Table(name="clientes")
+@Table(name="produtos")
 @Builder
 
-
-public class Clientes {
-
+public class Produtos {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column
-    private String cpf;
-
-    @Column
     private String nome;
 
     @Column
-    private String email;
+    private int estoque;
 
     @Column
-    private String telefone;
+    private double preco;
+
+    @Column
+    private double doacao;
+
+    @OneToMany(mappedBy = "produtos")
+    Set<Inventario> quantidade;
     
 }

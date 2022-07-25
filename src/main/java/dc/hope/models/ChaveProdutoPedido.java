@@ -1,4 +1,4 @@
-package models;
+package dc.hope.models;
 
 import java.io.Serializable;
 

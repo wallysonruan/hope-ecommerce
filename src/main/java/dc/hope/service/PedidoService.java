@@ -16,10 +16,17 @@ public class PedidoService {
     @Autowired
     PedidosRepository pedidosRepository;
 
+    
+
     public Pedidos salvar (PedidoRequest pedidoRequest){
         Pedidos pedidoDb = pedidoRequest.converterClasse();
         pedidosRepository.save(pedidoDb);
         return pedidoDb;
+    }
+
+    public Pedidos abrirPedido(PedidoRequest pedidoRequest){
+       Pedidos pedidoAberto = pedidoRequest.converterClasse();
+        return pedidoAberto;
     }
     
 }

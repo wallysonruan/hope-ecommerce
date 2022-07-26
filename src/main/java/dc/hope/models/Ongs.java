@@ -7,12 +7,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
 @Entity
 @Table(name="ongs")
 @Builder
+@AllArgsConstructor
 @Data
 
 public class Ongs {
@@ -29,4 +31,6 @@ public class Ongs {
 
     @Column
     private String email;
+
+    public Ongs(){}
 }

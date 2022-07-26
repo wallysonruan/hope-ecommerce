@@ -1,6 +1,7 @@
 package dc.hope.request;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 import dc.hope.models.Clientes;
 import dc.hope.models.Ongs;
@@ -15,7 +16,7 @@ public class PedidoRequest {
 
     private Clientes cliente_id;
     private Ongs ong_id;
-    private Date data;
+    private LocalDate data;
     private String forma_pagamento;
     private double valor_total;
     private double valor_doacao;

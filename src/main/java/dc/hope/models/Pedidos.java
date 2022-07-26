@@ -1,6 +1,7 @@
 package dc.hope.models;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,6 +16,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,6 +24,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name="pedidos")
 @Builder
+@AllArgsConstructor
 @Data
 
 public class Pedidos {
@@ -42,7 +45,7 @@ public class Pedidos {
     private Ongs ong;
 
     @Column
-    private Date data;
+    private LocalDate data;
 
     @Column
     private String forma_pagamento;
@@ -58,4 +61,6 @@ public class Pedidos {
     joinColumns = {@JoinColumn(name="pedido_id")},
     inverseJoinColumns = {@JoinColumn(name="produto_id")})
     private Set<Produtos> produtos = new HashSet<Produtos>();
+
+    public Pedidos(){}
 }

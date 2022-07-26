@@ -1,5 +1,7 @@
 package dc.hope.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,5 +25,9 @@ public class OngService {
         return ongDb;
 
     }
+
+    public List<Ongs> findByName(String nome){
+        return ongsRepository.findByNomeContainingIgnoreCase(nome);
+     }
     
 }

@@ -8,10 +8,12 @@ import javax.persistence.MapsId;
 import javax.persistence.Table;
 
 import lombok.Builder;
+import lombok.Data;
 
 @Entity
 @Table(name="inventario_pedidos_produtos")
 @Builder
+@Data
 
 
 public class Inventario {

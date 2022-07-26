@@ -7,11 +7,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 
 @Entity
 @Table(name="produtos")
 @Builder
+@Data
+@AllArgsConstructor
 
 public class Produtos {
     @Id
@@ -31,5 +35,5 @@ public class Produtos {
     @Column
     private double doacao;
 
-   
-}
+    public Produtos(){}
+   }

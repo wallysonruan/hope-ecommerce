@@ -1,5 +1,7 @@
 package dc.hope.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,5 +24,10 @@ public class ProdutoService {
         produtosRepository.save(produtoDb);
         return produtoDb;
     }
+
+    public List<Produtos> findByName(String nome){
+       return produtosRepository.findByNomeContainingIgnoreCase(nome);
+    }
     
+
 }

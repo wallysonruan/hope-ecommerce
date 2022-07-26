@@ -16,10 +16,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name="pedidos")
 @Builder
+@Data
 
 public class Pedidos {
   

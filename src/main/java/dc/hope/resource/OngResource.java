@@ -1,8 +1,12 @@
 package dc.hope.resource;
 
+import java.util.List;
+
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import dc.hope.models.Ongs;
@@ -22,5 +26,14 @@ public class OngResource {
     public Ongs cadastarOng(@RequestBody OngRequest ongRequest){
         return ongService.salvar(ongRequest);
     }
+
+    @GetMapping(path="busca")
+    public List<Ongs> arrayProdutos(@RequestParam String nome){
+
+        return ongService.findByName(nome);
+        
+        
+    }  
+
     
 }

@@ -30,4 +30,5 @@ public class Inventario {
     private Pedidos pedido;
     
     private int quantidade;
+
 }

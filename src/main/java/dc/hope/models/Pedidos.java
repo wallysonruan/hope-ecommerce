@@ -1,9 +1,10 @@
 package dc.hope.models;
 
-import java.sql.Date;
+
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,7 +20,7 @@ import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+
 
 @Entity
 @Table(name="pedidos")
@@ -56,11 +57,17 @@ public class Pedidos {
     @Column
     private double valor_doacao;
 
+    @Builder.Default
     @ManyToMany
     @JoinTable(name="inventario_pedidos_produtos",
     joinColumns = {@JoinColumn(name="pedido_id")},
     inverseJoinColumns = {@JoinColumn(name="produto_id")})
-    private Set<Produtos> produtos = new HashSet<Produtos>();
+    private List<Produtos> produtos = new ArrayList<>();
 
     public Pedidos(){}
+
+    public void addProduto(Produtos produto){
+        this.produtos.add(produto);
+    }
+    
 }

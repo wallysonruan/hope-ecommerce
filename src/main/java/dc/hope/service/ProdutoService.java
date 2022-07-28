@@ -12,7 +12,6 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @Service
-
 public class ProdutoService {
 
     @Autowired
@@ -29,5 +28,16 @@ public class ProdutoService {
        return produtosRepository.findByNomeContainingIgnoreCase(nome);
     }
     
+    public Produtos findById(Long id){
+        return produtosRepository.findById(id).get();
+    }
 
+    public List<Produtos> findAllById(List<Long> ids){
+        return produtosRepository.findAllById(ids);
+    }
+
+    public List<Produtos> findAll(){
+        return produtosRepository.findAll();
+    }
+    
 }

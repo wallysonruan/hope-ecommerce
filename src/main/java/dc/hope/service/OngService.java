@@ -30,4 +30,7 @@ public class OngService {
         return ongsRepository.findByNomeContainingIgnoreCase(nome);
      }
     
+     public Ongs findById(Long id){
+        return ongsRepository.findById(id).get();
+    }
 }

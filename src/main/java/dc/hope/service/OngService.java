@@ -18,19 +18,20 @@ public class OngService {
     @Autowired
     OngsRepository ongsRepository;
 
-    public Ongs salvar (OngRequest ongRequest){
-
-        Ongs ongDb = ongRequest.converterClasse();
-        ongsRepository.save(ongDb);
-        return ongDb;
-
-    }
-
     public List<Ongs> findByName(String nome){
         return ongsRepository.findByNomeContainingIgnoreCase(nome);
      }
     
      public Ongs findById(Long id){
         return ongsRepository.findById(id).get();
+    }
+
+    public Ongs cadastrar(OngRequest ongRequest){
+        Ongs ong = Ongs.builder()
+        .nome(ongRequest.getNome())
+        .cnpj(ongRequest.getCnpj())
+        .email(ongRequest.getEmail())
+        .build();
+        return ongsRepository.save(ong);
     }
 }

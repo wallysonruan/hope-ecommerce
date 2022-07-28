@@ -15,10 +15,13 @@ public class ClienteService {
     @Autowired
     ClienteRepository clienteRepository;
 
-    public Clientes salvar (ClienteRequest clienteRequest){
-        Clientes clienteDb = clienteRequest.converterClasse();
-        clienteRepository.save(clienteDb);
-        return clienteDb;
+    public Clientes cadastrar (ClienteRequest clienteRequest){
+        Clientes cliente = Clientes.builder()
+        .nome(clienteRequest.getNome())
+        .cpf(clienteRequest.getCpf())
+        .email(clienteRequest.getEmail())
+        .build();
+        return clienteRepository.save(cliente);
     }
 
     public Clientes findById(Long id){

@@ -24,7 +24,7 @@ public class OngResource {
 
     @PostMapping(path="cadastrar")
     public Ongs cadastarOng(@RequestBody OngRequest ongRequest){
-        return ongService.salvar(ongRequest);
+        return ongService.cadastrar(ongRequest);
     }
 
     @GetMapping(path="busca")

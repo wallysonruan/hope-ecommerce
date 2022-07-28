@@ -65,9 +65,5 @@ public class Pedidos {
     private List<Produtos> produtos = new ArrayList<>();
 
     public Pedidos(){}
-
-    public void addProduto(Produtos produto){
-        this.produtos.add(produto);
-    }
-    
+   
 }

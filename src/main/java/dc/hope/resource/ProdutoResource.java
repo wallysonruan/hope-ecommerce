@@ -25,7 +25,7 @@ public class ProdutoResource {
     @PostMapping(path="cadastrar")
     public Produtos cadastrarProdutos(@RequestBody ProdutoRequest produtoRequest){
 
-       return produtoService.salvar(produtoRequest);
+       return produtoService.cadastrar(produtoRequest);
     }
 
    @GetMapping(path="busca")
@@ -35,5 +35,7 @@ public class ProdutoResource {
         
         
     }  
+
+
     
 }

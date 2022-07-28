@@ -21,7 +21,7 @@ public class ClienteResource {
 
     @PostMapping(path="cadastrar")
     public Clientes cadastrarCliente(@RequestBody ClienteRequest clienteRequest){
-        return clienteService.salvar(clienteRequest);
+        return clienteService.cadastrar(clienteRequest);
     }
 
     @GetMapping("/{id}")

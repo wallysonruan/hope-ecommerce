@@ -3,7 +3,7 @@ package dc.hope.models;
 import java.io.Serializable;
 import java.util.Objects;
 
-import javax.persistence.Column;
+
 import javax.persistence.Embeddable;
 
 import lombok.AllArgsConstructor;

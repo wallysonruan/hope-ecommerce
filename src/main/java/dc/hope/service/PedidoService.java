@@ -1,9 +1,13 @@
 package dc.hope.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.time.LocalDate;
+
 import org.springframework.stereotype.Service;
 
+import dc.hope.models.Clientes;
+import dc.hope.models.Ongs;
 import dc.hope.models.Pedidos;
+import dc.hope.models.Produtos;
 import dc.hope.repository.PedidosRepository;
 import dc.hope.request.PedidoRequest;
 import lombok.AllArgsConstructor;
@@ -13,20 +17,49 @@ import lombok.AllArgsConstructor;
 
 public class PedidoService {
 
-    @Autowired
-    PedidosRepository pedidosRepository;
+ 
+    private final PedidosRepository pedidosRepository;
 
+    private final ProdutoService produtoService;
     
+    private final ClienteService clienteService;
+    
+    private final OngService ongsService;
+        
 
-    public Pedidos salvar (PedidoRequest pedidoRequest){
-        Pedidos pedidoDb = pedidoRequest.converterClasse();
-        pedidosRepository.save(pedidoDb);
-        return pedidoDb;
+    public Pedidos salvar (Pedidos pedidos){
+        return pedidosRepository.save(pedidos);
+
     }
 
+    public Pedidos findById(Long id){
+        return pedidosRepository.findById(id).get();
+    }
+    
+    public Pedidos addProduto(Long idPedido, Long idProduto){
+        Pedidos pedido = findById(idPedido);
+        Produtos produto = produtoService.findById(idProduto);
+        pedido.addProduto(produto);
+        return pedidosRepository.save(pedido);
+    }
+
+    public Ongs ong(Long id){
+        Ongs ong = ongsService.findById(id);
+        return ong;
+    }
+    
+    public Clientes cliente(Long id){
+        return clienteService.findById(id);
+    }
+     
     public Pedidos abrirPedido(PedidoRequest pedidoRequest){
-       Pedidos pedidoAberto = pedidoRequest.converterClasse();
-        return pedidoAberto;
+        Pedidos pedidos = Pedidos.builder()
+        .cliente(clienteService.findById(pedidoRequest.getCliente_id()))
+        .ong(ongsService.findById(pedidoRequest.getOng_id()))
+        .data(LocalDate.now())
+        .forma_pagamento(pedidoRequest.getForma_pagamento())
+        .build();
+        return pedidosRepository.save(pedidos);
     }
-    
+      
 }

@@ -20,7 +20,7 @@ import lombok.AllArgsConstructor;
 public class ProdutoResource {
 
 
-    private final ProdutoService produtoService;
+    private ProdutoService produtoService;
 
     @PostMapping(path="cadastrar")
     public Produtos cadastrarProdutos(@RequestBody ProdutoRequest produtoRequest){
@@ -32,8 +32,6 @@ public class ProdutoResource {
     public List<Produtos> arrayProdutos(@RequestParam String nome){
 
         return produtoService.findByName(nome);
-        
-        
     }  
     
 }

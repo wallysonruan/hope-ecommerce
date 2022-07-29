@@ -17,7 +17,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class ClienteResource {
 
-    private final ClienteService clienteService;
+    private ClienteService clienteService;
 
     @PostMapping(path="cadastrar")
     public Clientes cadastrarCliente(@RequestBody ClienteRequest clienteRequest){

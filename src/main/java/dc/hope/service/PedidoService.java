@@ -18,13 +18,13 @@ import lombok.AllArgsConstructor;
 public class PedidoService {
 
  
-    private final PedidosRepository pedidosRepository;
+    private PedidosRepository pedidosRepository;
 
-    private final ProdutoService produtoService;
+    private ProdutoService produtoService;
     
-    private final ClienteService clienteService;
+    private ClienteService clienteService;
     
-    private final OngService ongsService;
+    private OngService ongsService;
         
 
     public Pedidos salvar (Pedidos pedidos){

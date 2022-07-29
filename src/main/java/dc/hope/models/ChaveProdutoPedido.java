@@ -14,7 +14,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Embeddable
-
 public class ChaveProdutoPedido implements Serializable {
 
     private static final long serialVersionUID = 1L;

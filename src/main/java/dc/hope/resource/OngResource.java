@@ -20,7 +20,7 @@ import lombok.AllArgsConstructor;
 
 public class OngResource {
 
-    private final OngService ongService;
+    private OngService ongService;
 
     @PostMapping(path="cadastrar")
     public Ongs cadastarOng(@RequestBody OngRequest ongRequest){

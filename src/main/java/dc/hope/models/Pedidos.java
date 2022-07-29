@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,14 +19,15 @@ import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 @Entity
 @Table(name="pedidos")
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 @Data
-
 public class Pedidos {
   
     @Id
@@ -62,12 +62,9 @@ public class Pedidos {
     @JoinTable(name="inventario_pedidos_produtos",
     joinColumns = {@JoinColumn(name="pedido_id")},
     inverseJoinColumns = {@JoinColumn(name="produto_id")})
-    private List<Produtos> produtos = new ArrayList<>();
-
-    public Pedidos(){}
+    private List<Produtos> produtos = new ArrayList<Produtos>();
 
     public void addProduto(Produtos produto){
         this.produtos.add(produto);
     }
-    
 }

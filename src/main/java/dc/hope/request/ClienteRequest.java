@@ -21,7 +21,5 @@ public class ClienteRequest {
         .email(this.email)
         .telefone(this.telefone)
         .build();
-
-        
     }
 }

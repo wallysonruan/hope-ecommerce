@@ -2,6 +2,8 @@ package dc.hope.resource;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,12 +25,12 @@ public class OngResource {
     private final OngService ongService;
 
     @PostMapping(path="cadastrar")
-    public Ongs cadastarOng(@RequestBody OngRequest ongRequest){
+    public Ongs cadastarOng(@RequestBody @Valid OngRequest ongRequest){
         return ongService.cadastrar(ongRequest);
     }
 
-    @GetMapping(path="busca")
-    public List<Ongs> arrayProdutos(@RequestParam String nome){
+    @GetMapping(path="buscar")
+    public List<Ongs> Ongs(@RequestParam String nome){
 
         return ongService.findByName(nome);
         

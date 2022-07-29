@@ -3,8 +3,10 @@ package dc.hope.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import dc.hope.exceptions.DefaultException;
 import dc.hope.models.Clientes;
 import dc.hope.repository.ClienteRepository;
 import dc.hope.request.ClienteRequest;
@@ -25,7 +27,7 @@ public class ClienteService {
     }
 
     public Clientes findById(Long id){
-        return clienteRepository.findById(id).get();
+        return clienteRepository.findById(id).orElseThrow(new DefaultException(HttpStatus.BAD_REQUEST, "Pessoa cliente nao encontrada"));
     }
 
     public List<Clientes> findAllById(){

@@ -2,6 +2,8 @@ package dc.hope.resource;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,12 +25,12 @@ public class ProdutoResource {
     private final ProdutoService produtoService;
 
     @PostMapping(path="cadastrar")
-    public Produtos cadastrarProdutos(@RequestBody ProdutoRequest produtoRequest){
+    public Produtos cadastrarProdutos(@RequestBody @Valid ProdutoRequest produtoRequest){
 
        return produtoService.cadastrar(produtoRequest);
     }
 
-   @GetMapping(path="busca")
+   @GetMapping(path="buscar")
     public List<Produtos> arrayProdutos(@RequestParam String nome){
 
         return produtoService.findByName(nome);

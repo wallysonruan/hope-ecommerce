@@ -33,6 +33,7 @@ public class InventarioService {
         int quantidade = inventarioRequest.getQuantidade();
         Produtos produto = produtoService.findById(inventarioRequest.getProdutoId());
         Pedidos pedido = pedidoService.findById(inventarioRequest.getPedidoId());
+        if(pedido.isPedido_fechado()){throw new DefaultException(HttpStatus.BAD_REQUEST, "Este pedido já está fechado e não pode mais ser alterado");}
         int estoque = produto.getEstoque();
         double valortotal = pedido.getValor_total();
         double valordoacao = pedido.getValor_doacao();
@@ -46,8 +47,8 @@ public class InventarioService {
                 inventarioRepository.save(inventario);
                 produto.setEstoque(estoque - quantidade);
                 produtoService.salvar(produto);
-                pedido.setValor_total(valortotal + produto.getPreco());
-                pedido.setValor_doacao(valordoacao + produto.getPreco()*produto.getDoacao());
+                pedido.setValor_total(valortotal + produto.getPreco()*quantidade);
+                pedido.setValor_doacao(valordoacao + produto.getPreco()*produto.getDoacao()*quantidade);
                 return pedidoService.salvar(pedido);
                           }
             else{
@@ -59,19 +60,20 @@ public class InventarioService {
             produto.setEstoque(estoque - quantidade);
             inventarioRepository.save(inventario);
             produtoService.salvar(produto);
-            pedido.setValor_total(valortotal + produto.getPreco());
-            pedido.setValor_doacao(valordoacao + produto.getPreco()*produto.getDoacao());
+            pedido.setValor_total(valortotal + produto.getPreco()*quantidade);
+            pedido.setValor_doacao(valordoacao + produto.getPreco()*produto.getDoacao()*quantidade);
             return pedidoService.salvar(pedido);
         }
     }
  
       }
 
-      public Pedidos removeProduto(InventarioRequest inventarioRequest){
+    public Pedidos removeProduto(InventarioRequest inventarioRequest){
 
         int quantidade = inventarioRequest.getQuantidade();
         Produtos produto = produtoService.findById(inventarioRequest.getProdutoId());
         Pedidos pedido = pedidoService.findById(inventarioRequest.getPedidoId());
+        if(pedido.isPedido_fechado()){throw new DefaultException(HttpStatus.BAD_REQUEST, "Este pedido já está fechado e não pode mais ser alterado");}
         int estoque = produto.getEstoque();
         double valortotal = pedido.getValor_total();
         double valordoacao = pedido.getValor_doacao();

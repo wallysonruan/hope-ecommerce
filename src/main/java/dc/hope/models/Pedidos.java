@@ -57,6 +57,10 @@ public class Pedidos {
     @Column
     private double valor_doacao;
 
+    @Column
+    @Builder.Default
+    private boolean pedido_fechado = false;
+
     @Builder.Default
     @ManyToMany
     @JoinTable(name="inventario_pedidos_produtos",

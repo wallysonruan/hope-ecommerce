@@ -8,6 +8,8 @@ import dc.hope.models.Pedidos;
 import dc.hope.request.InventarioRequest;
 import dc.hope.service.InventarioService;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -24,22 +26,22 @@ public class InventarioResource {
     @Autowired
     InventarioService inventarioService;
 
-    @PostMapping(path="add")
-    public Pedidos addproduto(@RequestBody InventarioRequest inventarioRequest){
+    @PostMapping(path="adicionar")
+    public Pedidos addproduto(@RequestBody @Valid InventarioRequest inventarioRequest){
 
 
         return inventarioService.addProduto(inventarioRequest);
 
        }
     
-    @GetMapping(path="busca")
+    @GetMapping(path="buscar")
     public Inventario buscaInventario(@RequestBody ChaveProdutoPedido chave){
         
         return inventarioService.findById(chave);
     }    
 
     @PatchMapping(path="remover")
-    public Pedidos removePedidos(@RequestBody InventarioRequest inventarioRequest){
+    public Pedidos removePedidos(@RequestBody @Valid InventarioRequest inventarioRequest){
         return inventarioService.removeProduto(inventarioRequest);
     }
 }

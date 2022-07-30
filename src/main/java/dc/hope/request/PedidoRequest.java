@@ -19,8 +19,8 @@ public class PedidoRequest {
     private Long ongId;
 
     @NotNull(message = "Para abrir um pedido, é preciso Id do Cliente, Id da Ong e forma de pagamento")
-    @NotEmpty(message = "Para cadastro de novas ongs, é preciso preencher CNPJ, Nome e E-mail")
-    @NotBlank(message = "Para cadastro de novas ongs, é preciso preencher CNPJ, Nome e E-mail")
+    @NotEmpty(message = "Para abrir um pedido, é preciso Id do Cliente, Id da Ong e forma de pagamento")
+    @NotBlank(message = "Para abrir um pedido, é preciso Id do Cliente, Id da Ong e forma de pagamento")
     private String formaPagamento;
   
     

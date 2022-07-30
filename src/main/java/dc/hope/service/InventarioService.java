@@ -32,37 +32,27 @@ public class InventarioService {
 
         int quantidade = inventarioRequest.getQuantidade();
         Produtos produto = produtoService.findById(inventarioRequest.getProdutoId());
-        Pedidos pedido = pedidoService.findById(inventarioRequest.getPedidoId());
-        if(pedido.isPedido_fechado()){throw new DefaultException(HttpStatus.BAD_REQUEST, "Este pedido já está fechado e não pode mais ser alterado");}
-        int estoque = produto.getEstoque();
-        double valortotal = pedido.getValor_total();
-        double valordoacao = pedido.getValor_doacao();
+        Pedidos pedido = pedidoService.checarPedidoFechadoERetornar(inventarioRequest.getPedidoId());
         ChaveProdutoPedido chave = new  ChaveProdutoPedido(inventarioRequest.getPedidoId(), inventarioRequest.getProdutoId());
 
-        if( estoque < quantidade){throw new DefaultException(HttpStatus.BAD_REQUEST, "Sem estoque suficiente");}
+        if(quantidade < produto.getEstoque()){throw new DefaultException(HttpStatus.BAD_REQUEST, "Sem estoque suficiente");}
         else{
             if(!inventarioRepository.findById(chave).isEmpty()){
                 Inventario inventario = findById(chave);
                 inventario.setQuantidade(inventario.getQuantidade() + quantidade);
                 inventarioRepository.save(inventario);
-                produto.setEstoque(estoque - quantidade);
-                produtoService.salvar(produto);
-                pedido.setValor_total(valortotal + produto.getPreco()*quantidade);
-                pedido.setValor_doacao(valordoacao + produto.getPreco()*produto.getDoacao()*quantidade);
-                return pedidoService.salvar(pedido);
+                produtoService.removerEstoque(produto, quantidade);
+                return pedidoService.adicionarValorProduto(pedido, produto, quantidade);
                           }
             else{
             Inventario inventario = Inventario.builder()
             .quantidade(quantidade)
             .produto(produto)
-            .pedido(pedido)
+            .pedido(pedidoService.findById(inventarioRequest.getPedidoId()))
             .build();
-            produto.setEstoque(estoque - quantidade);
             inventarioRepository.save(inventario);
-            produtoService.salvar(produto);
-            pedido.setValor_total(valortotal + produto.getPreco()*quantidade);
-            pedido.setValor_doacao(valordoacao + produto.getPreco()*produto.getDoacao()*quantidade);
-            return pedidoService.salvar(pedido);
+            produtoService.removerEstoque(produto, quantidade);
+            return pedidoService.adicionarValorProduto(pedido, produto, quantidade);
         }
     }
  
@@ -72,31 +62,19 @@ public class InventarioService {
 
         int quantidade = inventarioRequest.getQuantidade();
         Produtos produto = produtoService.findById(inventarioRequest.getProdutoId());
-        Pedidos pedido = pedidoService.findById(inventarioRequest.getPedidoId());
-        if(pedido.isPedido_fechado()){throw new DefaultException(HttpStatus.BAD_REQUEST, "Este pedido já está fechado e não pode mais ser alterado");}
-        int estoque = produto.getEstoque();
-        double valortotal = pedido.getValor_total();
-        double valordoacao = pedido.getValor_doacao();
-        
+        Pedidos pedido = pedidoService.checarPedidoFechadoERetornar(inventarioRequest.getPedidoId());  
         ChaveProdutoPedido chave = new  ChaveProdutoPedido(inventarioRequest.getPedidoId(), inventarioRequest.getProdutoId());
-
         Inventario inventario = findById(chave);
         int quantidadeAnterior = inventario.getQuantidade();
+        
         if(quantidadeAnterior <= quantidade){
-            produto.setEstoque(estoque + quantidadeAnterior);
-            produtoService.salvar(produto);
-            pedidoService.salvar(pedido);
-            inventarioRepository.deleteById(inventario.getId());;
-            pedido.setValor_total(valortotal - produto.getPreco()*quantidadeAnterior);
-            pedido.setValor_doacao(valordoacao - produto.getPreco()*produto.getDoacao()*quantidadeAnterior);
-            return pedidoService.salvar(pedido);        }
+            produtoService.reporEstoque(produto, quantidade);
+            inventarioRepository.deleteById(inventario.getId());
+            return pedidoService.removerValorProduto(pedido, produto, quantidade); }
         else{
             inventario.setQuantidade(quantidadeAnterior - quantidade);
-            produto.setEstoque(estoque + quantidade);
-            produtoService.salvar(produto);
-            pedido.setValor_total(valortotal - produto.getPreco()*quantidade);
-            pedido.setValor_doacao(valordoacao - produto.getPreco()*produto.getDoacao()*quantidade);
-            return pedidoService.salvar(pedido);   
+            produtoService.reporEstoque(produto, quantidade);
+            return pedidoService.removerValorProduto(pedido, produto, quantidade);
         }
         
       }

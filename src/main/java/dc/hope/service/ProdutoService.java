@@ -28,10 +28,6 @@ public class ProdutoService {
         return produtosRepository.findById(id).orElseThrow(new DefaultException(HttpStatus.BAD_REQUEST, "Produto não encontrado"));
     }
 
-    public List<Produtos> findAllById(List<Long> ids){
-        return produtosRepository.findAllById(ids);
-    }
-
     public List<Produtos> findAll(){
         return produtosRepository.findAll();
     }
@@ -47,6 +43,18 @@ public class ProdutoService {
     }
     
     public Produtos salvar (Produtos produto){
+        return produtosRepository.save(produto);
+    }
+
+    public Produtos removerEstoque(Produtos produto, int quantidade){
+        int estoque = produto.getEstoque();
+        produto.setEstoque(estoque - quantidade);
+        return produtosRepository.save(produto);
+    }
+
+    public Produtos reporEstoque(Produtos produto, int quantidade){
+        int estoque = produto.getEstoque();
+        produto.setEstoque(estoque + quantidade);
         return produtosRepository.save(produto);
     }
 }

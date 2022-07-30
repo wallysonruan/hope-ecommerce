@@ -5,10 +5,10 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import dc.hope.models.Pedidos;
@@ -29,13 +29,13 @@ public class PedidoResource {
   }
   
 
-  @GetMapping(value="buscar")
-  public Pedidos buscaPedidos(@RequestParam Long idPedido){
+  @GetMapping(value="buscar/{idPedido}")
+  public Pedidos buscaPedidos(@PathVariable  Long idPedido){
     return pedidoService.findById(idPedido);
   }
 
-  @PatchMapping(value="fechar")
-  public String fecharpedido(@RequestParam Long idPedido){
+  @PatchMapping(value="fechar/{idPedido}")
+  public String fecharpedido(@PathVariable Long idPedido){
     return pedidoService.fecharPedido(idPedido);
   }
 }

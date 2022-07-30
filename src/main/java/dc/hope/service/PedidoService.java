@@ -33,7 +33,6 @@ public class PedidoService {
     private final OngService ongsService;
 
 
-
         
 
     public Pedidos salvar (Pedidos pedidos){
@@ -60,6 +59,7 @@ public class PedidoService {
     public String fecharPedido(Long idPedido) {
         Pedidos pedido = findById(idPedido);
         if(pedido.isPedido_fechado()){throw new DefaultException(HttpStatus.BAD_REQUEST, "Este pedido já está fechado e não pode mais ser alterado");};
+        if(pedido.getProdutos().isEmpty()){throw new DefaultException(HttpStatus.BAD_REQUEST, "Este pedido não contém produtos, não pode ser fechado");}
         pedido.setPedido_fechado(true);
         pedidosRepository.save(pedido);
         List<String> mensagem = new ArrayList<>();
@@ -74,14 +74,37 @@ public class PedidoService {
             mensagem.add("Quantidade: "+inventarioRepository.findById(chave).get().getQuantidade());
         }
         mensagem.add("O valor total do seu pedido é: "+pedido.getValor_total());
-        mensagem.add("Com essa compra, você gerou "+pedido.getValor_total()+" para a Ong "+pedido.getOng().getNome());
+        mensagem.add("Com essa compra, você gerou "+pedido.getValor_doacao()+" para a Ong "+pedido.getOng().getNome());
         mensagem.add("Você escolheu pagar utilizando "+pedido.getForma_pagamento());
         return mensagem.toString();
+    }
+
+    public Pedidos adicionarValorProduto(Pedidos pedido, Produtos produto, int quantidade){
+        double valortotal = pedido.getValor_total();
+        double valordoacao = pedido.getValor_doacao();
+        pedido.setValor_total(valortotal + produto.getPreco()*quantidade);
+        pedido.setValor_doacao(valordoacao + produto.getPreco()*produto.getDoacao()*quantidade);
+        return pedidosRepository.save(pedido);
+    
+    
+    }
+    
+
+        public Pedidos removerValorProduto(Pedidos pedido, Produtos produto, int quantidade){
+            double valortotal = pedido.getValor_total();
+            double valordoacao = pedido.getValor_doacao();
+            pedido.setValor_total(valortotal - produto.getPreco()*quantidade);
+            pedido.setValor_doacao(valordoacao - produto.getPreco()*produto.getDoacao()*quantidade);
+            return pedidosRepository.save(pedido);
+        
+        
+        }
 
 
-
-
+        public Pedidos checarPedidoFechadoERetornar(Long idPedido){
+            if(findById(idPedido).isPedido_fechado()){throw new DefaultException(HttpStatus.BAD_REQUEST, "Este pedido já está fechado e não pode mais ser alterado");}
+                else {return findById(idPedido);}}
 
     }
-      
-}
+
+

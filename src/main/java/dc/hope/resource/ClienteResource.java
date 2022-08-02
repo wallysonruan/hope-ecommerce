@@ -1,5 +1,7 @@
 package dc.hope.resource;
 
+import javax.validation.Valid;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,8 +22,8 @@ public class ClienteResource {
     private final ClienteService clienteService;
 
     @PostMapping(path="cadastrar")
-    public Clientes cadastrarCliente(@RequestBody ClienteRequest clienteRequest){
-        return clienteService.salvar(clienteRequest);
+    public Clientes cadastrarCliente(@RequestBody @Valid ClienteRequest clienteRequest){
+        return clienteService.cadastrar(clienteRequest);
     }
 
     @GetMapping("/{id}")

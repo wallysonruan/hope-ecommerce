@@ -1,8 +1,8 @@
 package dc.hope.request;
 
-import dc.hope.models.Inventario;
-import dc.hope.models.Pedidos;
-import dc.hope.models.Produtos;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -11,17 +11,15 @@ import lombok.Data;
 
 public class InventarioRequest {
 
-    private Pedidos pedido_id;
-    private Produtos produto_id;
+    @NotNull(message = "É preciso informar Id do Pedido, Id do produto e quantidade desejada")
+    private Long pedidoId;
+
+
+    @NotNull(message = "É preciso informar Id do Pedido, Id do produto e quantidade desejada")
+    private Long produtoId;
+
+    @NotNull(message = "É preciso informar Id do Pedido, Id do produto e quantidade desejada")
+    @Positive(message = "É preciso informar Id do Pedido, Id do produto e quantidade desejada")
     private int quantidade;
     
-    public Inventario converterClasse(){
-        return Inventario.builder()
-        .pedido(this.pedido_id)
-        .produto(this.produto_id)
-        .quantidade(this.quantidade)
-        .build();
-
-
-    }
 }

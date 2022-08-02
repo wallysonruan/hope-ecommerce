@@ -3,26 +3,29 @@ package dc.hope.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import dc.hope.assembler.Assembler;
+import dc.hope.exceptions.DefaultException;
 import dc.hope.models.Clientes;
 import dc.hope.repository.ClienteRepository;
 import dc.hope.request.ClienteRequest;
+import lombok.AllArgsConstructor;
 
 @Service
+@AllArgsConstructor
 public class ClienteService {
 
-    @Autowired
-    ClienteRepository clienteRepository;
+    private final ClienteRepository clienteRepository;
+    private final Assembler assmebler;
 
-    public Clientes salvar (ClienteRequest clienteRequest){
-        Clientes clienteDb = clienteRequest.converterClasse();
-        clienteRepository.save(clienteDb);
-        return clienteDb;
+    public Clientes cadastrar (ClienteRequest clienteRequest){
+        return clienteRepository.save(assmebler.clienteToModel(clienteRequest));
     }
 
     public Clientes findById(Long id){
-        return clienteRepository.findById(id).get();
+        return clienteRepository.findById(id).orElseThrow(new DefaultException(HttpStatus.BAD_REQUEST, "Pessoa cliente nao encontrada"));
     }
 
     public List<Clientes> findAllById(){

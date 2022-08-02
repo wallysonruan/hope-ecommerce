@@ -1,7 +1,11 @@
 package dc.hope.resource;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,14 +22,20 @@ public class PedidoResource {
   @Autowired
   PedidoService pedidoService;
 
-  @PostMapping(path="abrirPedido")
-  public Pedidos abrirPedido(@RequestBody PedidoRequest pedidoRequest){
+  @PostMapping(path="abrir")
+  public Pedidos abrirPedido(@RequestBody @Valid PedidoRequest pedidoRequest){
 
      return pedidoService.abrirPedido(pedidoRequest);
   }
   
-  @PatchMapping(value = "add")
-  public Pedidos addProduto(@RequestBody Long idPedido, Long idProduto){
-    return pedidoService.addProduto(idPedido, idProduto);
+
+  @GetMapping(value="buscar/{idPedido}")
+  public Pedidos buscaPedidos(@PathVariable  Long idPedido){
+    return pedidoService.findById(idPedido);
+  }
+
+  @PatchMapping(value="fechar/{idPedido}")
+  public String fecharpedido(@PathVariable Long idPedido){
+    return pedidoService.fecharPedido(idPedido);
   }
 }

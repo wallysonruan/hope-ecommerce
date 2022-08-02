@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import dc.hope.assembler.Assembler;
 import dc.hope.exceptions.DefaultException;
 import dc.hope.models.Ongs;
 import dc.hope.repository.OngsRepository;
@@ -17,8 +18,8 @@ import lombok.AllArgsConstructor;
 
 public class OngService {
 
-    @Autowired
-    OngsRepository ongsRepository;
+    private final OngsRepository ongsRepository;
+    private final Assembler assembler;
 
     public List<Ongs> findByName(String nome){
         return ongsRepository.findByNomeContainingIgnoreCase(nome);
@@ -29,11 +30,7 @@ public class OngService {
     }
 
     public Ongs cadastrar(OngRequest ongRequest){
-        Ongs ong = Ongs.builder()
-        .nome(ongRequest.getNome())
-        .cnpj(ongRequest.getCnpj())
-        .email(ongRequest.getEmail())
-        .build();
+        Ongs ong = assembler.ongToModel(ongRequest);
         return ongsRepository.save(ong);
     }
 }

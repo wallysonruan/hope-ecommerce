@@ -6,24 +6,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import dc.hope.assembler.Assembler;
 import dc.hope.exceptions.DefaultException;
 import dc.hope.models.Clientes;
 import dc.hope.repository.ClienteRepository;
 import dc.hope.request.ClienteRequest;
+import lombok.AllArgsConstructor;
 
 @Service
+@AllArgsConstructor
 public class ClienteService {
 
-    @Autowired
-    ClienteRepository clienteRepository;
+    private final ClienteRepository clienteRepository;
+    private final Assembler assmebler;
 
     public Clientes cadastrar (ClienteRequest clienteRequest){
-        Clientes cliente = Clientes.builder()
-        .nome(clienteRequest.getNome())
-        .cpf(clienteRequest.getCpf())
-        .email(clienteRequest.getEmail())
-        .build();
-        return clienteRepository.save(cliente);
+        return clienteRepository.save(assmebler.clienteToModel(clienteRequest));
     }
 
     public Clientes findById(Long id){

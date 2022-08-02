@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import dc.hope.assembler.Assembler;
 import dc.hope.exceptions.DefaultException;
 import dc.hope.models.Produtos;
 import dc.hope.repository.ProdutosRepository;
@@ -16,8 +17,9 @@ import lombok.AllArgsConstructor;
 @Service
 public class ProdutoService {
 
-    @Autowired
-    ProdutosRepository produtosRepository;
+    
+    private final ProdutosRepository produtosRepository;
+    private final Assembler assembler;
 
 
     public List<Produtos> findByName(String nome){
@@ -25,7 +27,7 @@ public class ProdutoService {
     }
     
     public Produtos findById(Long id){
-        return produtosRepository.findById(id).orElseThrow(new DefaultException(HttpStatus.BAD_REQUEST, "Produto não encontrado"));
+        return produtosRepository.findById(id).orElseThrow(new DefaultException(HttpStatus.NO_CONTENT, "Produto não encontrado"));
     }
 
     public List<Produtos> findAll(){
@@ -33,13 +35,7 @@ public class ProdutoService {
     }
 
     public Produtos cadastrar (ProdutoRequest produtoRequest){
-        Produtos produto = Produtos.builder()
-        .nome(produtoRequest.getNome())
-        .estoque(produtoRequest.getEstoque())
-        .preco(produtoRequest.getPreco())
-        .doacao(produtoRequest.getDoacao())
-        .build();
-        return produtosRepository.save(produto);
+        return produtosRepository.save(assembler.produtoToModel(produtoRequest));
     }
     
     public Produtos salvar (Produtos produto){

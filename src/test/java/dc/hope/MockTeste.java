@@ -65,7 +65,7 @@ public class MockTeste {
 }
 
 public ClienteRequest mockClienteRequest(){
-  ClienteRequest clienteRequest = new ClienteRequest(null, null, null, null);
+  ClienteRequest clienteRequest = new ClienteRequest();
   clienteRequest.setNome("teste");
   clienteRequest.setCpf("teste");
   clienteRequest.setEmail("teste@teste.com");

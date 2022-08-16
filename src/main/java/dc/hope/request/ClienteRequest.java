@@ -35,5 +35,7 @@ public class ClienteRequest {
     @NotEmpty(message = "Para cadastro de novas pessoas clientes, é preciso preencher CPF, Nome, E-mail e Telefone")
     @NotBlank(message = "Para cadastro de novas pessoas clientes, é preciso preencher CPF, Nome, E-mail e Telefone")
     private String telefone;
+
+    public ClienteRequest (){}
        
     }

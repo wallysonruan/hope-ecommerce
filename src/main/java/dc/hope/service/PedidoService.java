@@ -44,6 +44,15 @@ public class PedidoService {
         return pedidosRepository.findById(id).orElseThrow(new DefaultException(HttpStatus.BAD_REQUEST, "Pedido não encontrado"));
     }
 
+    public List<Pedidos> findAllById(){
+        return pedidosRepository.findAll();
+    }
+
+    public void  deletar(Long id){
+        var objeto = findById(id);
+        pedidosRepository.delete(objeto);
+    }
+
     
     
     public Pedidos abrirPedido(PedidoRequest pedidoRequest){

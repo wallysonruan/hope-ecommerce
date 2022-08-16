@@ -2,6 +2,7 @@ package dc.hope.service;
 
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,18 @@ public class ClienteService {
 
     public List<Clientes> findAllById(){
         return clienteRepository.findAll();
+    }
+
+    public Clientes atualizarClientes(Long id, ClienteRequest clienteRequest){
+
+        var entity = findById(id);
+        BeanUtils.copyProperties(clienteRequest, entity,"id");
+        return clienteRepository.save(entity);
+    }
+
+    public void  deletar(Long id){
+        var objeto = findById(id);
+        clienteRepository.delete(objeto);
     }
 
     

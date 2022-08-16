@@ -9,4 +9,6 @@ import dc.hope.models.Produtos;
 public interface ProdutosRepository extends JpaRepository <Produtos, Long> {
 
 	List<Produtos> findByNomeContainingIgnoreCase(String nome);
+	List<Produtos> findByNomeContainingIgnoreCaseOrderByPrecoAsc(String nome);
+	List<Produtos> findByNomeContainingIgnoreCaseOrderByPrecoDesc(String nome);
 }

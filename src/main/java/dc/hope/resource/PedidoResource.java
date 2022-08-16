@@ -3,6 +3,7 @@ package dc.hope.resource;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,4 +39,9 @@ public class PedidoResource {
   public String fecharpedido(@PathVariable Long idPedido){
     return pedidoService.fecharPedido(idPedido);
   }
+
+  @DeleteMapping(path = "{id}")
+        public void deletar(@PathVariable Long id){
+            pedidoService.deletar(id);
+    }
 }

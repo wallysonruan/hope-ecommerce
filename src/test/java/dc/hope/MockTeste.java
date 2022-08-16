@@ -29,7 +29,7 @@ public class MockTeste {
   @Mock
   private ClienteRepository clienteRepository;
 
-  @Test
+  /*@Test
   public void findById(){
     var obj = mockCliente();
     when(clienteRepository.findById(any())).thenReturn(Optional.of(obj));
@@ -71,6 +71,6 @@ public ClienteRequest mockClienteRequest(){
   clienteRequest.setEmail("teste@teste.com");
   clienteRequest.setTelefone("teste");
   return clienteRequest;
-}
+} */
   
 }

@@ -29,8 +29,17 @@ public class OngService {
         return ongsRepository.findById(id).orElseThrow(new DefaultException(HttpStatus.BAD_REQUEST, "Ong nao encontrada"));
     }
 
+    public List<Ongs> findAllById(){
+        return ongsRepository.findAll();
+    }
+
     public Ongs cadastrar(OngRequest ongRequest){
         Ongs ong = assembler.ongToModel(ongRequest);
         return ongsRepository.save(ong);
+    }
+
+    public void  deletar(Long id){
+        var objeto = findById(id);
+        ongsRepository.delete(objeto);
     }
 }

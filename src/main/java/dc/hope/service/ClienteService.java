@@ -40,5 +40,10 @@ public class ClienteService {
         return clienteRepository.save(entity);
     }
 
+    public void  deletar(Long id){
+        var objeto = findById(id);
+        clienteRepository.delete(objeto);
+    }
+
     
 }

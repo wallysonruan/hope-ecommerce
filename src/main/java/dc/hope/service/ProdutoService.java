@@ -3,6 +3,7 @@ package dc.hope.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -53,4 +54,19 @@ public class ProdutoService {
         produto.setEstoque(estoque + quantidade);
         return produtosRepository.save(produto);
     }
+
+    public void  deletar(Long id){
+        var objeto = findById(id);
+        produtosRepository.delete(objeto);
+    }
+
+    public List<Produtos> ordernaProdutosMenorValor(String nome){
+        return produtosRepository.findByNomeContainingIgnoreCaseOrderByPrecoAsc(nome);
+    }
+
+    public List<Produtos> ordernaProdutosMaiorValor(String nome){
+        return produtosRepository.findByNomeContainingIgnoreCaseOrderByPrecoDesc(nome);
+    }
+
+
 }

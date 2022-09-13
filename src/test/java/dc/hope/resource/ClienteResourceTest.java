@@ -14,7 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
 @ContextConfiguration(locations = "classpath:app-context.xml")
@@ -42,7 +42,11 @@ class ClienteResourceTest {
     }
 
     @Test
-    void cadastrarCliente() {
+    void deveCadastrarClienteApenasUmaVez() {
+        when(clienteService.cadastrar(clienteRequest)).thenReturn(cliente);
+        clienteResource.cadastrarCliente(clienteRequest);
+
+        verify(clienteService, atMostOnce()).atualizarClientes(ID, clienteRequest);
     }
 
     @Test

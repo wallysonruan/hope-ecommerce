@@ -14,6 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -78,15 +79,17 @@ class ClienteResourceTest {
     }
 
     @Test
-    void whenFindByIdReturnSuccess() {
+    void deveriaRetornarSucesso_QuandoProcurarQualquerIdLongOuInt() throws Exception{
+        mockMvc.perform(
+                get(ENDPOINT + "/" + ID)
+        ).andExpect(status().isOk());
     }
 
     @Test
-    void update() {
-    }
-
-    @Test
-    void deletar() {
+    void deveriaRetornarBadRequest_QuandoProcurarQualquerIdNaN() throws Exception{
+        mockMvc.perform(
+                get(ENDPOINT + "/" + "a")
+        ).andExpect(status().isBadRequest());
     }
 
     private void inicializarCliente(){

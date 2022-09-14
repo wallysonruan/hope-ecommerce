@@ -13,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -55,7 +56,7 @@ class ClienteResourceTest {
     }
 
     @Test
-    void deveriaCadastrarComSucesso() throws Exception {
+    void deveriaRetornarSucesso_QuandoCadastrar() throws Exception {
         String clienteFormatoJson = String.format(CLIENTE_REQUEST_BODY, CPF, NOME, EMAIL, TELEFONE);
 
         mockMvc.perform(
@@ -66,7 +67,7 @@ class ClienteResourceTest {
     }
 
     @Test
-    void quandoEmailInvalidoDeveriaBadRequest() throws Exception {
+    void deveriaRetornarBadRequest_QuandoEmailInvalido() throws Exception {
         String clienteFormatoJson = String.format(CLIENTE_REQUEST_BODY, CPF, NOME, "email.com", TELEFONE);
 
         mockMvc.perform(

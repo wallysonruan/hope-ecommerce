@@ -3,7 +3,6 @@ package dc.hope.service;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -19,10 +18,10 @@ import lombok.AllArgsConstructor;
 public class ClienteService {
 
     private final ClienteRepository clienteRepository;
-    private final Assembler assmebler;
+    private final Assembler assembler;
 
     public Clientes cadastrar (ClienteRequest clienteRequest){
-        return clienteRepository.save(assmebler.clienteToModel(clienteRequest));
+        return clienteRepository.save(assembler.clienteToModel(clienteRequest));
     }
 
     public Clientes findById(Long id){

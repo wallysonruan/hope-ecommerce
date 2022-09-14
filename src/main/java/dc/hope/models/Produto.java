@@ -12,30 +12,28 @@ import lombok.Builder;
 import lombok.Data;
 
 @Entity
-@Table(name="clientes")
+@Table(name="produtos")
 @Builder
-@AllArgsConstructor
 @Data
+@AllArgsConstructor
 
-
-public class Clientes {
-
+public class Produto {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column
-    private String cpf;
-
-    @Column
     private String nome;
 
     @Column
-    private String email;
+    private int estoque;
 
     @Column
-    private String telefone;
-    
-    public Clientes (){}
-}
+    private double preco;
+
+    @Column
+    private double doacao;
+
+    public Produto(){}
+   }

@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 
 import dc.hope.exceptions.DefaultException;
 import dc.hope.models.ChaveProdutoPedido;
-import dc.hope.models.Pedidos;
-import dc.hope.models.Produtos;
+import dc.hope.models.Pedido;
+import dc.hope.models.Produto;
 import dc.hope.repository.InventarioRepository;
 import dc.hope.repository.PedidosRepository;
 import dc.hope.request.PedidoRequest;
@@ -35,16 +35,16 @@ public class PedidoService {
 
         
 
-    public Pedidos salvar (Pedidos pedidos){
+    public Pedido salvar (Pedido pedidos){
         return pedidosRepository.save(pedidos);
 
     }
 
-    public Pedidos findById(Long id){
+    public Pedido findById(Long id){
         return pedidosRepository.findById(id).orElseThrow(new DefaultException(HttpStatus.BAD_REQUEST, "Pedido não encontrado"));
     }
 
-    public List<Pedidos> findAllById(){
+    public List<Pedido> findAllById(){
         return pedidosRepository.findAll();
     }
 
@@ -55,8 +55,8 @@ public class PedidoService {
 
     
     
-    public Pedidos abrirPedido(PedidoRequest pedidoRequest){
-        Pedidos pedidos = Pedidos.builder()
+    public Pedido abrirPedido(PedidoRequest pedidoRequest){
+        Pedido pedidos = Pedido.builder()
         .cliente(clienteService.findById(pedidoRequest.getClienteId()))
         .ong(ongsService.findById(pedidoRequest.getOngId()))
         .data(LocalDate.now())
@@ -66,7 +66,7 @@ public class PedidoService {
     }
 
     public String fecharPedido(Long idPedido) {
-        Pedidos pedido = findById(idPedido);
+        Pedido pedido = findById(idPedido);
         if(pedido.isPedido_fechado()){throw new DefaultException(HttpStatus.BAD_REQUEST, "Este pedido já está fechado e não pode mais ser alterado");};
         if(pedido.getProdutos().isEmpty()){throw new DefaultException(HttpStatus.BAD_REQUEST, "Este pedido não contém produtos, não pode ser fechado");}
         pedido.setPedido_fechado(true);
@@ -75,7 +75,7 @@ public class PedidoService {
         mensagem.add("Ficamos muito contentes com sua compra, "+pedido.getCliente().getNome());
         mensagem.add("Seu Id de pedido é: "+pedido.getId());
         mensagem.add("Estes são os itens em seu pedido");
-        for (Produtos produto : pedido.getProdutos()) {
+        for (Produto produto : pedido.getProdutos()) {
             ChaveProdutoPedido chave = new ChaveProdutoPedido(pedido.getId(), produto.getId());
             mensagem.add("Item: "+produto.getNome());
             mensagem.add("Preço unitário: "+produto.getPreco());
@@ -88,7 +88,7 @@ public class PedidoService {
         return mensagem.toString();
     }
 
-    public Pedidos adicionarValorProduto(Pedidos pedido, Produtos produto, int quantidade){
+    public Pedido adicionarValorProduto(Pedido pedido, Produto produto, int quantidade){
         double valortotal = pedido.getValor_total();
         double valordoacao = pedido.getValor_doacao();
         pedido.setValor_total(valortotal + produto.getPreco()*quantidade);
@@ -99,7 +99,7 @@ public class PedidoService {
     }
     
 
-        public Pedidos removerValorProduto(Pedidos pedido, Produtos produto, int quantidade){
+        public Pedido removerValorProduto(Pedido pedido, Produto produto, int quantidade){
             double valortotal = pedido.getValor_total();
             double valordoacao = pedido.getValor_doacao();
             pedido.setValor_total(valortotal - produto.getPreco()*quantidade);
@@ -110,7 +110,7 @@ public class PedidoService {
         }
 
 
-        public Pedidos checarPedidoFechadoERetornar(Long idPedido){
+        public Pedido checarPedidoFechadoERetornar(Long idPedido){
             if(findById(idPedido).isPedido_fechado()){throw new DefaultException(HttpStatus.BAD_REQUEST, "Este pedido já está fechado e não pode mais ser alterado");}
                 else {return findById(idPedido);}}
 

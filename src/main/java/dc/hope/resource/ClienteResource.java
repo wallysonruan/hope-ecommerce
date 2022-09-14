@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import dc.hope.models.Clientes;
+import dc.hope.models.Cliente;
 import dc.hope.request.ClienteRequest;
 import dc.hope.service.ClienteService;
 import lombok.AllArgsConstructor;
@@ -24,17 +24,17 @@ public class ClienteResource {
     private final ClienteService clienteService;
 
     @PostMapping(path="cadastrar")
-    public Clientes cadastrarCliente(@RequestBody @Valid ClienteRequest clienteRequest){
+    public Cliente cadastrarCliente(@RequestBody @Valid ClienteRequest clienteRequest){
         return clienteService.cadastrar(clienteRequest);
     }
 
     @GetMapping("/{id}")
-    public Clientes findById(@PathVariable Long id){
+    public Cliente findById(@PathVariable Long id){
         return clienteService.findById(id);
     }
 
     @PutMapping(path = "{id}")
-    public Clientes update(@PathVariable Long id, @RequestBody ClienteRequest clienteRequest){
+    public Cliente update(@PathVariable Long id, @RequestBody ClienteRequest clienteRequest){
         return clienteService.atualizarClientes(id, clienteRequest);
     }
 

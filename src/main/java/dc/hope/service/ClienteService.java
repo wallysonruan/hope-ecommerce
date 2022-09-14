@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import dc.hope.assembler.Assembler;
 import dc.hope.exceptions.DefaultException;
-import dc.hope.models.Clientes;
+import dc.hope.models.Cliente;
 import dc.hope.repository.ClienteRepository;
 import dc.hope.request.ClienteRequest;
 import lombok.AllArgsConstructor;
@@ -20,19 +20,19 @@ public class ClienteService {
     private final ClienteRepository clienteRepository;
     private final Assembler assembler;
 
-    public Clientes cadastrar (ClienteRequest clienteRequest){
+    public Cliente cadastrar (ClienteRequest clienteRequest){
         return clienteRepository.save(assembler.clienteToModel(clienteRequest));
     }
 
-    public Clientes findById(Long id){
+    public Cliente findById(Long id){
         return clienteRepository.findById(id).orElseThrow(new DefaultException(HttpStatus.BAD_REQUEST, "Pessoa cliente nao encontrada"));
     }
 
-    public List<Clientes> findAllById(){
+    public List<Cliente> findAllById(){
         return clienteRepository.findAll();
     }
 
-    public Clientes atualizarClientes(Long id, ClienteRequest clienteRequest){
+    public Cliente atualizarClientes(Long id, ClienteRequest clienteRequest){
 
         var entity = findById(id);
         BeanUtils.copyProperties(clienteRequest, entity,"id");

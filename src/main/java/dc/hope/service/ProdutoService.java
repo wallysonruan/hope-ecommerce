@@ -2,14 +2,12 @@ package dc.hope.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import dc.hope.assembler.Assembler;
 import dc.hope.exceptions.DefaultException;
-import dc.hope.models.Produtos;
+import dc.hope.models.Produto;
 import dc.hope.repository.ProdutosRepository;
 import dc.hope.request.ProdutoRequest;
 import lombok.AllArgsConstructor;
@@ -23,33 +21,33 @@ public class ProdutoService {
     private final Assembler assembler;
 
 
-    public List<Produtos> findByName(String nome){
+    public List<Produto> findByName(String nome){
        return produtosRepository.findByNomeContainingIgnoreCase(nome);
     }
     
-    public Produtos findById(Long id){
+    public Produto findById(Long id){
         return produtosRepository.findById(id).orElseThrow(new DefaultException(HttpStatus.NO_CONTENT, "Produto não encontrado"));
     }
 
-    public List<Produtos> findAll(){
+    public List<Produto> findAll(){
         return produtosRepository.findAll();
     }
 
-    public Produtos cadastrar (ProdutoRequest produtoRequest){
+    public Produto cadastrar (ProdutoRequest produtoRequest){
         return produtosRepository.save(assembler.produtoToModel(produtoRequest));
     }
     
-    public Produtos salvar (Produtos produto){
+    public Produto salvar (Produto produto){
         return produtosRepository.save(produto);
     }
 
-    public Produtos removerEstoque(Produtos produto, int quantidade){
+    public Produto removerEstoque(Produto produto, int quantidade){
         int estoque = produto.getEstoque();
         produto.setEstoque(estoque - quantidade);
         return produtosRepository.save(produto);
     }
 
-    public Produtos reporEstoque(Produtos produto, int quantidade){
+    public Produto reporEstoque(Produto produto, int quantidade){
         int estoque = produto.getEstoque();
         produto.setEstoque(estoque + quantidade);
         return produtosRepository.save(produto);
@@ -60,11 +58,11 @@ public class ProdutoService {
         produtosRepository.delete(objeto);
     }
 
-    public List<Produtos> ordernaProdutosMenorValor(String nome){
+    public List<Produto> ordernaProdutosMenorValor(String nome){
         return produtosRepository.findByNomeContainingIgnoreCaseOrderByPrecoAsc(nome);
     }
 
-    public List<Produtos> ordernaProdutosMaiorValor(String nome){
+    public List<Produto> ordernaProdutosMaiorValor(String nome){
         return produtosRepository.findByNomeContainingIgnoreCaseOrderByPrecoDesc(nome);
     }
 

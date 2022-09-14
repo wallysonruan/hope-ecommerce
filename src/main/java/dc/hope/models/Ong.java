@@ -17,7 +17,7 @@ import lombok.Data;
 @AllArgsConstructor
 @Data
 
-public class Ongs {
+public class Ong {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,5 +32,5 @@ public class Ongs {
     @Column
     private String email;
 
-    public Ongs(){}
+    public Ong(){}
 }

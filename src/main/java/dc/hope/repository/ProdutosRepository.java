@@ -4,11 +4,11 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import dc.hope.models.Produtos;
+import dc.hope.models.Produto;
 
-public interface ProdutosRepository extends JpaRepository <Produtos, Long> {
+public interface ProdutosRepository extends JpaRepository <Produto, Long> {
 
-	List<Produtos> findByNomeContainingIgnoreCase(String nome);
-	List<Produtos> findByNomeContainingIgnoreCaseOrderByPrecoAsc(String nome);
-	List<Produtos> findByNomeContainingIgnoreCaseOrderByPrecoDesc(String nome);
+	List<Produto> findByNomeContainingIgnoreCase(String nome);
+	List<Produto> findByNomeContainingIgnoreCaseOrderByPrecoAsc(String nome);
+	List<Produto> findByNomeContainingIgnoreCaseOrderByPrecoDesc(String nome);
 }

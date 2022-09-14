@@ -3,10 +3,10 @@ package dc.hope.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import dc.hope.models.Pedidos;
+import dc.hope.models.Pedido;
 
 
-public interface PedidosRepository extends JpaRepository <Pedidos, Long> {
+public interface PedidosRepository extends JpaRepository <Pedido, Long> {
 
 
 }

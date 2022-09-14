@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import dc.hope.models.Ongs;
+import dc.hope.models.Ong;
 import dc.hope.request.OngRequest;
 import dc.hope.service.OngService;
 import lombok.AllArgsConstructor;
@@ -27,12 +27,12 @@ public class OngResource {
     private final OngService ongService;
 
     @PostMapping(path="cadastrar")
-    public Ongs cadastarOng(@RequestBody @Valid OngRequest ongRequest){
+    public Ong cadastarOng(@RequestBody @Valid OngRequest ongRequest){
         return ongService.cadastrar(ongRequest);
     }
 
     @GetMapping(path="buscar")
-    public List<Ongs> Ongs(@RequestParam String nome){
+    public List<Ong> Ongs(@RequestParam String nome){
 
         return ongService.findByName(nome);
         

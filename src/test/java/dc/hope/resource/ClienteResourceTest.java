@@ -9,12 +9,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.*;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @ContextConfiguration(locations = "classpath:app-context.xml")
@@ -22,6 +22,7 @@ class ClienteResourceTest {
 
     private Clientes cliente;
     private ClienteRequest clienteRequest;
+    private MockMvc mockMvc;
 
     @InjectMocks
     ClienteResource clienteResource;
@@ -29,40 +30,54 @@ class ClienteResourceTest {
     @Mock
     ClienteService clienteService;
 
-    private static final Long ID = 12345L;
-    private static final String CPF = "09878976534";
+    private static final Long ID = 1L;
+    private static final String CPF = "27535742190";
     private static final String NOME = "Alguém desconhecido aqui";
     private static final String EMAIL = "email@gmail.com";
     private static final String TELEFONE = "77965865433";
+    private static final String ENDPOINT = "/cliente";
+    private static final String CLIENTE_REQUEST_BODY = """
+          {
+            "cpf":"%s",
+            "nome":"%s",
+            "email":"%s",
+            "telefone":"%s"
+            }
+            """;
 
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.openMocks(this);
+        try {
+            MockitoAnnotations.openMocks(this);
+        }catch (Exception e){}
         inicializarCliente();
+        mockMvc = MockMvcBuilders.standaloneSetup(clienteResource).build();
     }
 
     @Test
-    void deveCadastrarClienteApenasUmaVez() {
-        when(clienteService.cadastrar(clienteRequest)).thenReturn(cliente);
-        clienteResource.cadastrarCliente(clienteRequest);
+    void deveriaCadastrarComSucesso() throws Exception {
+        String clienteFormatoJson = String.format(CLIENTE_REQUEST_BODY, CPF, NOME, EMAIL, TELEFONE);
 
-        verify(clienteService, atMostOnce()).atualizarClientes(ID, clienteRequest);
+        mockMvc.perform(
+                post(ENDPOINT + "/cadastrar")
+                        .content(clienteFormatoJson)
+                        .contentType(MediaType.APPLICATION_JSON)
+        ).andExpect(status().isOk());
+    }
+
+    @Test
+    void quandoEmailInvalidoDeveriaBadRequest() throws Exception {
+        String clienteFormatoJson = String.format(CLIENTE_REQUEST_BODY, CPF, NOME, "email.com", TELEFONE);
+
+        mockMvc.perform(
+                post(ENDPOINT + "/cadastrar")
+                        .content(clienteFormatoJson)
+                        .contentType(MediaType.APPLICATION_JSON)
+        ).andExpect(status().isBadRequest());
     }
 
     @Test
     void whenFindByIdReturnSuccess() {
-        when(clienteResource.findById(anyLong())).thenReturn(cliente);
-
-        Clientes response = clienteResource.findById(ID);
-
-        assertNotNull(response);
-        assertEquals(Clientes.class, response.getClass());
-
-        assertEquals(ID, response.getId());
-        assertEquals(CPF, response.getCpf());
-        assertEquals(NOME, response.getNome());
-        assertEquals(EMAIL, response.getEmail());
-        assertEquals(TELEFONE, response.getTelefone());
     }
 
     @Test

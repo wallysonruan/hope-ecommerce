@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import dc.hope.models.Pedidos;
+import dc.hope.models.Pedido;
 import dc.hope.request.PedidoRequest;
 import dc.hope.service.PedidoService;
 
@@ -24,14 +24,14 @@ public class PedidoResource {
   PedidoService pedidoService;
 
   @PostMapping(path="abrir")
-  public Pedidos abrirPedido(@RequestBody @Valid PedidoRequest pedidoRequest){
+  public Pedido abrirPedido(@RequestBody @Valid PedidoRequest pedidoRequest){
 
      return pedidoService.abrirPedido(pedidoRequest);
   }
   
 
   @GetMapping(value="buscar/{idPedido}")
-  public Pedidos buscaPedidos(@PathVariable  Long idPedido){
+  public Pedido buscaPedidos(@PathVariable  Long idPedido){
     return pedidoService.findById(idPedido);
   }
 

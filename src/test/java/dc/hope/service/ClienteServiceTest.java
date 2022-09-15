@@ -1,7 +1,7 @@
 package dc.hope.service;
 
 import dc.hope.assembler.Assembler;
-import dc.hope.models.Clientes;
+import dc.hope.models.Cliente;
 import dc.hope.repository.ClienteRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,7 +33,7 @@ class ClienteServiceTest {
     @Mock
     Assembler assembler;
 
-    Clientes esperado;
+    Cliente esperado;
 
 
 
@@ -41,7 +41,7 @@ class ClienteServiceTest {
     void setUp() {
         MockitoAnnotations.openMocks(this);
         service = new ClienteService(repository, assembler);
-        esperado = new Clientes(ID, CPF, NOME, EMAIL, TELEFONE);;
+        esperado = new Cliente(ID, CPF, NOME, EMAIL, TELEFONE);;
     }
 
     @Test
@@ -53,11 +53,11 @@ class ClienteServiceTest {
         
         Mockito.when(repository.findById(Mockito.anyLong())).thenReturn(Optional.of(esperado));
 
-        Clientes response = service.findById(ID);
+        Cliente response = service.findById(ID);
 
         assertNotNull(response);
 
-        assertEquals(Clientes.class, response.getClass());
+        assertEquals(Cliente.class, response.getClass());
         assertEquals(esperado, response);
 
     }

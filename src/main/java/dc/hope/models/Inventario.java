@@ -25,11 +25,11 @@ public class Inventario {
 
     @ManyToOne
     @MapsId("produtoId")
-    private Produtos produto;
+    private Produto produto;
 
     @ManyToOne
     @MapsId("pedidoId")
-    private Pedidos pedido;
+    private Pedido pedido;
     
     private int quantidade;
 

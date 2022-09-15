@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import dc.hope.models.ChaveProdutoPedido;
 import dc.hope.models.Inventario;
-import dc.hope.models.Pedidos;
+import dc.hope.models.Pedido;
 import dc.hope.request.InventarioRequest;
 import dc.hope.service.InventarioService;
 
@@ -27,7 +27,7 @@ public class InventarioResource {
     InventarioService inventarioService;
 
     @PostMapping(path="adicionar")
-    public Pedidos addproduto(@RequestBody @Valid InventarioRequest inventarioRequest){
+    public Pedido addproduto(@RequestBody @Valid InventarioRequest inventarioRequest){
 
 
         return inventarioService.addProduto(inventarioRequest);
@@ -41,7 +41,7 @@ public class InventarioResource {
     }    
 
     @PatchMapping(path="remover")
-    public Pedidos removePedidos(@RequestBody @Valid InventarioRequest inventarioRequest){
+    public Pedido removePedidos(@RequestBody @Valid InventarioRequest inventarioRequest){
         return inventarioService.removeProduto(inventarioRequest);
     }
 }

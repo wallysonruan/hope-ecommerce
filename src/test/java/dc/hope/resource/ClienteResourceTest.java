@@ -1,6 +1,6 @@
 package dc.hope.resource;
 
-import dc.hope.models.Clientes;
+import dc.hope.models.Cliente;
 import dc.hope.request.ClienteRequest;
 import dc.hope.service.ClienteService;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,7 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ContextConfiguration(locations = "classpath:app-context.xml")
 class ClienteResourceTest {
 
-    private Clientes cliente;
+    private Cliente cliente;
     private ClienteRequest clienteRequest;
     private MockMvc mockMvc;
 
@@ -93,7 +93,7 @@ class ClienteResourceTest {
     }
 
     private void inicializarCliente(){
-        cliente = new Clientes(ID, CPF, NOME, EMAIL, TELEFONE);
+        cliente = new Cliente(ID, CPF, NOME, EMAIL, TELEFONE);
         clienteRequest = new ClienteRequest(CPF, NOME, EMAIL, TELEFONE);
     }
 }

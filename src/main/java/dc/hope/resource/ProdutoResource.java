@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import dc.hope.models.Produtos;
+import dc.hope.models.Produto;
 import dc.hope.request.ProdutoRequest;
 import dc.hope.service.ProdutoService;
 import lombok.AllArgsConstructor;
@@ -27,13 +27,13 @@ public class ProdutoResource {
     private final ProdutoService produtoService;
 
     @PostMapping(path="cadastrar")
-    public Produtos cadastrarProdutos(@RequestBody @Valid ProdutoRequest produtoRequest){
+    public Produto cadastrarProdutos(@RequestBody @Valid ProdutoRequest produtoRequest){
 
        return produtoService.cadastrar(produtoRequest);
     }
 
    @GetMapping(path="buscar")
-    public List<Produtos> arrayProdutos(@RequestParam String nome){
+    public List<Produto> arrayProdutos(@RequestParam String nome){
 
         return produtoService.findByName(nome);        
         
@@ -45,7 +45,7 @@ public class ProdutoResource {
     }
 
     @GetMapping(path="ordernar")
-    public List<Produtos> arrayProdutoOrdenado(@RequestParam String nome,boolean ordem){
+    public List<Produto> arrayProdutoOrdenado(@RequestParam String nome,boolean ordem){
         if(ordem){
             return produtoService.ordernaProdutosMenorValor(nome);
         }

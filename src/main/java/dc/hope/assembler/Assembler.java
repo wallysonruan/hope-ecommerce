@@ -3,9 +3,9 @@ package dc.hope.assembler;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
-import dc.hope.models.Clientes;
-import dc.hope.models.Ongs;
-import dc.hope.models.Produtos;
+import dc.hope.models.Cliente;
+import dc.hope.models.Ong;
+import dc.hope.models.Produto;
 import dc.hope.request.ClienteRequest;
 import dc.hope.request.OngRequest;
 import dc.hope.request.ProdutoRequest;
@@ -19,17 +19,17 @@ public class Assembler {
 
     private final ModelMapper modelMapper;
 
-    public Clientes clienteToModel(ClienteRequest clienteRequest){
-        return modelMapper.map(clienteRequest, Clientes.class);
+    public Cliente clienteToModel(ClienteRequest clienteRequest){
+        return modelMapper.map(clienteRequest, Cliente.class);
     }
 
-    public Ongs ongToModel(OngRequest ongRequest){
-        return modelMapper.map(ongRequest, Ongs.class);
+    public Ong ongToModel(OngRequest ongRequest){
+        return modelMapper.map(ongRequest, Ong.class);
     }
 
-    public Produtos produtoToModel(ProdutoRequest produtoRequest){
+    public Produto produtoToModel(ProdutoRequest produtoRequest){
 
-        return modelMapper.map(produtoRequest, Produtos.class);
+        return modelMapper.map(produtoRequest, Produto.class);
     }
     
 }

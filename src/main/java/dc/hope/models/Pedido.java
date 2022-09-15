@@ -28,7 +28,7 @@ import lombok.Data;
 @AllArgsConstructor
 @Data
 
-public class Pedidos {
+public class Pedido {
   
     @Id
     @Column
@@ -38,12 +38,12 @@ public class Pedidos {
 
     @ManyToOne
     @JoinColumn(name = "cliente_id")
-    private Clientes cliente;
+    private Cliente cliente;
 
 
     @ManyToOne
     @JoinColumn(name = "ong_id")
-    private Ongs ong;
+    private Ong ong;
 
     @Column
     private LocalDate data;
@@ -66,8 +66,8 @@ public class Pedidos {
     @JoinTable(name="inventario_pedidos_produtos",
     joinColumns = {@JoinColumn(name="pedido_id")},
     inverseJoinColumns = {@JoinColumn(name="produto_id")})
-    private List<Produtos> produtos = new ArrayList<>();
+    private List<Produto> produtos = new ArrayList<>();
 
-    public Pedidos(){}
+    public Pedido(){}
    
 }

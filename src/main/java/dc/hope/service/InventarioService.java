@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 import dc.hope.exceptions.DefaultException;
 import dc.hope.models.ChaveProdutoPedido;
 import dc.hope.models.Inventario;
-import dc.hope.models.Pedidos;
-import dc.hope.models.Produtos;
+import dc.hope.models.Pedido;
+import dc.hope.models.Produto;
 import dc.hope.repository.InventarioRepository;
 import dc.hope.request.InventarioRequest;
 import lombok.AllArgsConstructor;
@@ -28,11 +28,11 @@ public class InventarioService {
         return inventarioRepository.findById(chave).orElseThrow(new DefaultException(HttpStatus.BAD_REQUEST, "Pedido ou produto não encontrado"));
         }
 
-    public Pedidos addProduto(InventarioRequest inventarioRequest){
+    public Pedido addProduto(InventarioRequest inventarioRequest){
 
         int quantidade = inventarioRequest.getQuantidade();
-        Produtos produto = produtoService.findById(inventarioRequest.getProdutoId());
-        Pedidos pedido = pedidoService.checarPedidoFechadoERetornar(inventarioRequest.getPedidoId());
+        Produto produto = produtoService.findById(inventarioRequest.getProdutoId());
+        Pedido pedido = pedidoService.checarPedidoFechadoERetornar(inventarioRequest.getPedidoId());
         ChaveProdutoPedido chave = new  ChaveProdutoPedido(inventarioRequest.getPedidoId(), inventarioRequest.getProdutoId());
 
         if(quantidade < produto.getEstoque()){throw new DefaultException(HttpStatus.BAD_REQUEST, "Sem estoque suficiente");}
@@ -58,11 +58,11 @@ public class InventarioService {
  
       }
 
-    public Pedidos removeProduto(InventarioRequest inventarioRequest){
+    public Pedido removeProduto(InventarioRequest inventarioRequest){
 
         int quantidade = inventarioRequest.getQuantidade();
-        Produtos produto = produtoService.findById(inventarioRequest.getProdutoId());
-        Pedidos pedido = pedidoService.checarPedidoFechadoERetornar(inventarioRequest.getPedidoId());  
+        Produto produto = produtoService.findById(inventarioRequest.getProdutoId());
+        Pedido pedido = pedidoService.checarPedidoFechadoERetornar(inventarioRequest.getPedidoId());  
         ChaveProdutoPedido chave = new  ChaveProdutoPedido(inventarioRequest.getPedidoId(), inventarioRequest.getProdutoId());
         Inventario inventario = findById(chave);
         int quantidadeAnterior = inventario.getQuantidade();

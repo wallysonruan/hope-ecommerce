@@ -28,7 +28,7 @@ public class ClienteService {
         return clienteRepository.findById(id).orElseThrow(new DefaultException(HttpStatus.BAD_REQUEST, "Pessoa cliente nao encontrada"));
     }
 
-    public List<Cliente> findAllById(){
+    public List<Cliente> findAll(){
         return clienteRepository.findAll();
     }
 
@@ -40,8 +40,7 @@ public class ClienteService {
     }
 
     public void  deletar(Long id){
-        var objeto = findById(id);
-        clienteRepository.delete(objeto);
+        clienteRepository.deleteById(id);;
     }
 
     

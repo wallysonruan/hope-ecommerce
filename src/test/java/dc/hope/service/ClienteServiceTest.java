@@ -3,6 +3,8 @@ package dc.hope.service;
 import dc.hope.assembler.Assembler;
 import dc.hope.models.Cliente;
 import dc.hope.repository.ClienteRepository;
+import dc.hope.request.ClienteRequest;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -11,9 +13,16 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @SpringBootTest
 class ClienteServiceTest {
@@ -33,7 +42,9 @@ class ClienteServiceTest {
     @Mock
     Assembler assembler;
 
-    Cliente esperado;
+    Cliente cliente;
+
+    ClienteRequest clienteRequest;
 
 
 
@@ -41,29 +52,47 @@ class ClienteServiceTest {
     void setUp() {
         MockitoAnnotations.openMocks(this);
         service = new ClienteService(repository, assembler);
-        esperado = new Cliente(ID, CPF, NOME, EMAIL, TELEFONE);;
+        cliente = new Cliente(ID, CPF, NOME, EMAIL, TELEFONE);
+        clienteRequest = new ClienteRequest(CPF, NOME, EMAIL, TELEFONE);
     }
 
     @Test
     void cadastrar() {
+        when(repository.save(any())).thenReturn(cliente);
+
+        Cliente response = service.cadastrar(clienteRequest);
+
+        assertNotNull(response);
+        assertEquals(Cliente.class, response.getClass());
+        assertEquals(cliente, response);
+
     }
 
     @Test
     void findById() {
         
-        Mockito.when(repository.findById(Mockito.anyLong())).thenReturn(Optional.of(esperado));
+        Mockito.when(repository.findById(Mockito.anyLong())).thenReturn(Optional.of(cliente));
 
         Cliente response = service.findById(ID);
 
         assertNotNull(response);
-
         assertEquals(Cliente.class, response.getClass());
-        assertEquals(esperado, response);
+        assertEquals(cliente, response);
 
     }
 
     @Test
     void findAllById() {
+        when(repository.findAll()).thenReturn(List.of(cliente));
+        List<Cliente> list = service.findAll();
+
+        assertNotNull(list);
+        assertEquals(ID, list.get(0).getId());
+        assertEquals(CPF, list.get(0).getCpf());
+        assertEquals(NOME, list.get(0).getNome());
+        assertEquals(EMAIL, list.get(0).getEmail());
+        assertEquals(TELEFONE, list.get(0).getTelefone());
+
     }
 
     @Test
@@ -72,6 +101,11 @@ class ClienteServiceTest {
 
     @Test
     void deletar() {
+        when(repository.findById(anyLong())).thenReturn(Optional.of(cliente));
+        doNothing().when(repository).deleteById(anyLong());
+        service.deletar(ID);
+        verify(repository, times(1)).deleteById(anyLong());
+        
     }
 
 }

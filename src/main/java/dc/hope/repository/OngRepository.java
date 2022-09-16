@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import dc.hope.models.Ong;
 
-public interface OngsRepository extends JpaRepository <Ong, Long> {
+public interface OngRepository extends JpaRepository <Ong, Long> {
   List<Ong> findByNomeContainingIgnoreCase(String nome);
 }

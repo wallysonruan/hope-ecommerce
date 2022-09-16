@@ -9,10 +9,11 @@ import org.hibernate.validator.constraints.br.CNPJ;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
-
+@NoArgsConstructor
 public class OngRequest {
    
     @NotNull(message = "Para cadastro de novas ongs, é preciso preencher CNPJ, Nome e E-mail")

@@ -1,16 +1,14 @@
 package dc.hope.service;
 
 import java.util.List;
-
-import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-
 import dc.hope.assembler.Assembler;
 import dc.hope.exceptions.DefaultException;
 import dc.hope.models.Cliente;
 import dc.hope.repository.ClienteRepository;
 import dc.hope.request.ClienteRequest;
+import dc.hope.request.ClienteUpdateRequest;
 import lombok.AllArgsConstructor;
 
 @Service
@@ -32,11 +30,10 @@ public class ClienteService {
         return clienteRepository.findAll();
     }
 
-    public Cliente atualizarClientes(Long id, ClienteRequest clienteRequest){
-
-        var entity = findById(id);
-        BeanUtils.copyProperties(clienteRequest, entity,"id");
-        return clienteRepository.save(entity);
+    public Cliente atualizarClientes(Long id, ClienteUpdateRequest clienteUpdateRequest){
+    Cliente cliente = findById(id);
+    Cliente clienteUpdated =  assembler.atualizarCliente(clienteUpdateRequest, cliente);
+    return clienteRepository.save(clienteUpdated);
     }
 
     public void  deletar(Long id){

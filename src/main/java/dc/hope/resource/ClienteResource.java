@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import dc.hope.models.Cliente;
 import dc.hope.request.ClienteRequest;
+import dc.hope.request.ClienteUpdateRequest;
 import dc.hope.service.ClienteService;
 import lombok.AllArgsConstructor;
 
@@ -34,8 +35,8 @@ public class ClienteResource {
     }
 
     @PutMapping(path = "{id}")
-    public Cliente update(@PathVariable Long id, @RequestBody ClienteRequest clienteRequest){
-        return clienteService.atualizarClientes(id, clienteRequest);
+    public Cliente update(@PathVariable Long id, @RequestBody ClienteUpdateRequest clienteUpdateRequest){
+        return clienteService.atualizarClientes(id, clienteUpdateRequest);
     }
 
     @DeleteMapping(path = "{id}")

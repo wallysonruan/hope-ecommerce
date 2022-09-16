@@ -10,6 +10,7 @@ import dc.hope.exceptions.DefaultException;
 import dc.hope.models.Ong;
 import dc.hope.repository.OngRepository;
 import dc.hope.request.OngRequest;
+import dc.hope.request.OngUpdateRequest;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -40,4 +41,10 @@ public class OngService {
     public void  deletar(Long id){
         ongsRepository.deleteById(id);
     }
+
+    public Ong atualizarOng(Long id, OngUpdateRequest ongUpdateRequest){
+        Ong ong = findById(id);
+        Ong ongUpdated =  assembler.atualizarOng(ongUpdateRequest, ong);
+        return ongsRepository.save(ongUpdated);
+        }
 }

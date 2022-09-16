@@ -10,6 +10,7 @@ import dc.hope.exceptions.DefaultException;
 import dc.hope.models.Produto;
 import dc.hope.repository.ProdutosRepository;
 import dc.hope.request.ProdutoRequest;
+import dc.hope.request.ProdutoUpdateRequest;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -66,5 +67,9 @@ public class ProdutoService {
         return produtosRepository.findByNomeContainingIgnoreCaseOrderByPrecoDesc(nome);
     }
 
-
+    public Produto atualizarProduto(Long id, ProdutoUpdateRequest produtoUpdateRequest){
+        Produto produto = findById(id);
+        Produto produtoUpdated =  assembler.atualizarProduto(produtoUpdateRequest, produto);
+        return produtosRepository.save(produtoUpdated);
+        }
 }

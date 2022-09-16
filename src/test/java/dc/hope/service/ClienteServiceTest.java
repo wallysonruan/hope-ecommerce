@@ -4,6 +4,7 @@ import dc.hope.assembler.Assembler;
 import dc.hope.models.Cliente;
 import dc.hope.repository.ClienteRepository;
 import dc.hope.request.ClienteRequest;
+import dc.hope.request.ClienteUpdateRequest;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -30,6 +31,7 @@ class ClienteServiceTest {
     private final Long ID = 1L;
     private final String CPF = "0000000000";
     private final String NOME = "Luke";
+    private final String NOME2 = "Luke2";
     private final String EMAIL = "uke@gmail.com";
     private final String TELEFONE = "0000000000";
 
@@ -41,10 +43,9 @@ class ClienteServiceTest {
 
     @Mock
     Assembler assembler;
-
     Cliente cliente;
-
     ClienteRequest clienteRequest;
+    ClienteUpdateRequest clienteUpdateRequest;
 
 
 
@@ -54,6 +55,8 @@ class ClienteServiceTest {
         service = new ClienteService(repository, assembler);
         cliente = new Cliente(ID, CPF, NOME, EMAIL, TELEFONE);
         clienteRequest = new ClienteRequest(CPF, NOME, EMAIL, TELEFONE);
+        clienteUpdateRequest = new ClienteUpdateRequest();
+        clienteUpdateRequest.setNome(NOME2);
     }
 
     @Test
@@ -97,6 +100,13 @@ class ClienteServiceTest {
 
     @Test
     void atualizarClientes() {
+        when(repository.findById(anyLong())).thenReturn(Optional.of(cliente));
+        Cliente clienteAtualizado =  service.atualizarClientes(ID, clienteUpdateRequest);
+        assertEquals(clienteAtualizado.getId(), cliente.getId());
+        assertEquals(clienteAtualizado.getCpf(), cliente.getCpf());
+        assertEquals(clienteAtualizado.getEmail(), cliente.getEmail());
+        assertEquals(clienteAtualizado.getTelefone(), cliente.getTelefone());
+        assertEquals(clienteAtualizado.getNome(), clienteUpdateRequest.getNome());
     }
 
     @Test

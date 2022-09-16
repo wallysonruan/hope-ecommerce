@@ -8,12 +8,14 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import dc.hope.models.Ong;
 import dc.hope.request.OngRequest;
+import dc.hope.request.OngUpdateRequest;
 import dc.hope.service.OngService;
 import lombok.AllArgsConstructor;
 
@@ -41,6 +43,11 @@ public class OngResource {
     @DeleteMapping(path = "{id}")
         public void deletar(@PathVariable Long id){
             ongService.deletar(id);
+    }
+
+    @PutMapping(path = "{id}")
+    public Ong update(@PathVariable Long id, @RequestBody OngUpdateRequest ongUpdateRequest){
+        return ongService.atualizarOng(id, ongUpdateRequest);
     }
 
     

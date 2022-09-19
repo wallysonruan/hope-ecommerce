@@ -40,6 +40,11 @@ public class ProdutoResource {
         return produtoService.findByName(nome);        
         
     }
+
+    @GetMapping(path = "buscartodos")
+    public List<Produto> arrayTodosProdutos(){
+        return produtoService.findAll();
+    }
     
     @DeleteMapping(path = "{id}")
         public void deletar(@PathVariable Long id){

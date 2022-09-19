@@ -1,5 +1,7 @@
 package dc.hope.resource;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,10 @@ public class PedidoResource {
      return pedidoService.abrirPedido(pedidoRequest);
   }
   
+  @GetMapping(path = "buscartodos")
+  public List<Pedido> buscartodos(){
+    return pedidoService.findAllById();
+  }
 
   @GetMapping(value="buscar/{idPedido}")
   public Pedido buscaPedidos(@PathVariable  Long idPedido){

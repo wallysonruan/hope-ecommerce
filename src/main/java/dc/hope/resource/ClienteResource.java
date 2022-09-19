@@ -1,5 +1,7 @@
 package dc.hope.resource;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -32,6 +34,11 @@ public class ClienteResource {
     @GetMapping("/{id}")
     public Cliente findById(@PathVariable Long id){
         return clienteService.findById(id);
+    }
+
+    @GetMapping("/buscartodos")
+    public List<Cliente> buscartodos(){
+        return clienteService.findAll();
     }
 
     @PutMapping(path = "{id}")

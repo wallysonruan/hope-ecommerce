@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import dc.hope.models.Ong;
@@ -32,11 +33,17 @@ public class OngResource {
         return ongService.cadastrar(ongRequest);
     }
 
-    @GetMapping(path="buscar")
+    @GetMapping(path="buscartodos")
     public List<Ong> buscarTodos(){
 
         return ongService.findAll();
         
+        
+    }
+
+    @GetMapping(path="buscar")
+    public List<Ong> buscar(@RequestParam String nome){
+        return ongService.findByName(nome);      
         
     }
     

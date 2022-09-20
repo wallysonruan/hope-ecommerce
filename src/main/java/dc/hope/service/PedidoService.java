@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -19,21 +18,14 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @Service
-
 public class PedidoService {
 
- 
-   @Autowired
-    PedidosRepository pedidosRepository;
+    private final PedidosRepository pedidosRepository;
 
-    @Autowired
-    InventarioRepository inventarioRepository;
+    private final InventarioRepository inventarioRepository;
 
     private final ClienteService clienteService;
-    private final OngService ongsService;
-
-
-        
+    private final OngService ongService;
 
     public Pedido salvar (Pedido pedidos){
         return pedidosRepository.save(pedidos);
@@ -52,13 +44,11 @@ public class PedidoService {
         var objeto = findById(id);
         pedidosRepository.delete(objeto);
     }
-
-    
-    
+ 
     public Pedido abrirPedido(PedidoRequest pedidoRequest){
         Pedido pedidos = Pedido.builder()
         .cliente(clienteService.findById(pedidoRequest.getClienteId()))
-        .ong(ongsService.findById(pedidoRequest.getOngId()))
+        .ong(ongService.findById(pedidoRequest.getOngId()))
         .data(LocalDate.now())
         .forma_pagamento(pedidoRequest.getFormaPagamento())
         .build();
@@ -98,22 +88,23 @@ public class PedidoService {
     
     }
     
-
-        public Pedido removerValorProduto(Pedido pedido, Produto produto, int quantidade){
-            double valortotal = pedido.getValor_total();
-            double valordoacao = pedido.getValor_doacao();
-            pedido.setValor_total(valortotal - produto.getPreco()*quantidade);
-            pedido.setValor_doacao(valordoacao - produto.getPreco()*produto.getDoacao()*quantidade);
-            return pedidosRepository.save(pedido);
+    public Pedido removerValorProduto(Pedido pedido, Produto produto, int quantidade){
+        double valortotal = pedido.getValor_total();
+        double valordoacao = pedido.getValor_doacao();
+        pedido.setValor_total(valortotal - produto.getPreco()*quantidade);
+        pedido.setValor_doacao(valordoacao - produto.getPreco()*produto.getDoacao()*quantidade);
+        return pedidosRepository.save(pedido);
         
         
-        }
-
-
-        public Pedido checarPedidoFechadoERetornar(Long idPedido){
-            if(findById(idPedido).isPedido_fechado()){throw new DefaultException(HttpStatus.BAD_REQUEST, "Este pedido já está fechado e não pode mais ser alterado");}
-                else {return findById(idPedido);}}
-
     }
+
+    public Pedido checarPedidoFechadoERetornar(Long idPedido){
+        if(findById(idPedido).isPedido_fechado()){throw new DefaultException(HttpStatus.BAD_REQUEST, "Este pedido já está fechado e não pode mais ser alterado");
+        }
+        else {return findById(idPedido);
+        }
+    }
+
+}
 
 

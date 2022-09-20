@@ -36,7 +36,7 @@ class OngServiceTest {
     @Mock
     private Assembler assembler;
 
-    private final Long ID = 1l;
+    private final Long ID = 1L;
 
     private final String CNPJ = "33333333";
 

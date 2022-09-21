@@ -53,7 +53,7 @@ public class Assembler {
         this.modelMapper.getConfiguration().setPropertyCondition(Conditions.isNotNull());
         Produto produtoUpdate = ProdutoUpdateToModel(produtoUpdateRequest);
         modelMapper.map(produtoUpdate, produtoToUpdate);
-        return produtoUpdate;    
+        return produtoToUpdate;    
     }
 
     public Ong OngUpdateToModel(OngUpdateRequest ongUpdateRequest){

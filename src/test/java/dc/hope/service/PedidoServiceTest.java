@@ -54,13 +54,13 @@ class PedidoServiceTest {
 
     private LocalDate data;
 
-/*     @BeforeEach
+     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
         service = new PedidoService(pedidoRepository, inventarioRepository, clienteService, ongService);
-        pedido = new Pedido(ID, FORMA_PAGAMENTO, VALOR_TOTAL, VALOR_DOACAO)
+        
         ong = new Ong(1L, "222222", "ong", "ong@ong.com");
-    } */
+    } 
 
     @Test
     void salvar() {

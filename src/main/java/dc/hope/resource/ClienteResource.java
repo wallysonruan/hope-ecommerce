@@ -32,7 +32,7 @@ public class ClienteResource {
     }
 
     @GetMapping("/{id}")
-    public Cliente findById(@PathVariable Long id){
+    public Cliente findById(@PathVariable @Valid Long id){
         return clienteService.findById(id);
     }
 
@@ -42,12 +42,12 @@ public class ClienteResource {
     }
 
     @PutMapping(path = "{id}")
-    public Cliente update(@PathVariable Long id, @RequestBody ClienteUpdateRequest clienteUpdateRequest){
+    public Cliente update(@PathVariable @Valid Long id, @RequestBody @Valid ClienteUpdateRequest clienteUpdateRequest){
         return clienteService.atualizarClientes(id, clienteUpdateRequest);
     }
 
     @DeleteMapping(path = "{id}")
-        public void deletar(@PathVariable Long id){
+        public void deletar(@PathVariable @Valid Long id){
             clienteService.deletar(id);
     }
     

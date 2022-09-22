@@ -48,12 +48,12 @@ public class OngResource {
     }
     
     @DeleteMapping(path = "{id}")
-        public void deletar(@PathVariable Long id){
+        public void deletar(@PathVariable @Valid Long id){
             ongService.deletar(id);
     }
 
     @PutMapping(path = "{id}")
-    public Ong update(@PathVariable Long id, @RequestBody OngUpdateRequest ongUpdateRequest){
+    public Ong update(@PathVariable @Valid Long id, @RequestBody @Valid OngUpdateRequest ongUpdateRequest){
         return ongService.atualizarOng(id, ongUpdateRequest);
     }
 

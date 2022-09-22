@@ -46,7 +46,10 @@ public class Assembler {
     }
 
     public Produto ProdutoUpdateToModel(ProdutoUpdateRequest produtoUpdateRequest){
-        return modelMapper.map(produtoUpdateRequest, Produto.class);
+        this.modelMapper.getConfiguration().setPropertyCondition(Conditions.isNotNull());
+        Produto produto = modelMapper.map(produtoUpdateRequest, Produto.class);
+        return produto;
+
     }
     
     public Produto atualizarProduto(ProdutoUpdateRequest produtoUpdateRequest, Produto produtoToUpdate){

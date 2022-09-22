@@ -35,7 +35,7 @@ public class ProdutoResource {
     }
 
    @GetMapping(path="buscar")
-    public List<Produto> arrayProdutos(@RequestParam String nome){
+    public List<Produto> arrayProdutos(@RequestParam @Valid String nome){
 
         return produtoService.findByName(nome);        
         
@@ -47,7 +47,7 @@ public class ProdutoResource {
     }
     
     @DeleteMapping(path = "{id}")
-        public void deletar(@PathVariable Long id){
+        public void deletar(@PathVariable @Valid Long id){
             produtoService.deletar(id);
     }
 
@@ -60,8 +60,9 @@ public class ProdutoResource {
     }
 
     @PutMapping(path = "{id}")
-    public Produto update(@PathVariable Long id, @RequestBody ProdutoUpdateRequest produtoUpdateRequest){
-        return produtoService.atualizarProduto(id, produtoUpdateRequest);
+    public Produto update(@PathVariable @Valid Long id, @RequestBody @Valid ProdutoUpdateRequest produtoUpdateRequest){
+        Produto produto = produtoService.atualizarProduto(id, produtoUpdateRequest);
+        return produto;
     }
 
     

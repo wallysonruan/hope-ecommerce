@@ -14,13 +14,13 @@ public class ProdutoUpdateRequest {
     private String nome;
     
     @PositiveOrZero
-    private int estoque;
+    private Integer estoque;
 
     
     @Positive
-    private double preco;
+    private Double preco;
 
     @Positive
-    private double doacao;
+    private Double doacao;
    
 }

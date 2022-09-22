@@ -35,7 +35,7 @@ public class InventarioService {
         Pedido pedido = pedidoService.checarPedidoFechadoERetornar(inventarioRequest.getPedidoId());
         ChaveProdutoPedido chave = new  ChaveProdutoPedido(inventarioRequest.getPedidoId(), inventarioRequest.getProdutoId());
 
-        if(quantidade < produto.getEstoque()){throw new DefaultException(HttpStatus.BAD_REQUEST, "Sem estoque suficiente");}
+        if(quantidade > produto.getEstoque()){throw new DefaultException(HttpStatus.BAD_REQUEST, "Sem estoque suficiente");}
         else{
             if(!inventarioRepository.findById(chave).isEmpty()){
                 Inventario inventario = findById(chave);

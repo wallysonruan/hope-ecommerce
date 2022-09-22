@@ -37,17 +37,17 @@ public class PedidoResource {
   }
 
   @GetMapping(value="buscar/{idPedido}")
-  public Pedido buscaPedidos(@PathVariable  Long idPedido){
+  public Pedido buscaPedidos(@PathVariable @Valid Long idPedido){
     return pedidoService.findById(idPedido);
   }
 
   @PatchMapping(value="fechar/{idPedido}")
-  public String fecharpedido(@PathVariable Long idPedido){
+  public String fecharpedido(@PathVariable @Valid Long idPedido){
     return pedidoService.fecharPedido(idPedido);
   }
 
   @DeleteMapping(path = "{id}")
-        public void deletar(@PathVariable Long id){
+        public void deletar(@PathVariable @Valid Long id){
             pedidoService.deletar(id);
     }
 }

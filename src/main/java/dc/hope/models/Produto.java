@@ -27,13 +27,13 @@ public class Produto {
     private String nome;
 
     @Column
-    private int estoque;
+    private Integer estoque;
 
     @Column
-    private double preco;
+    private Double preco;
 
     @Column
-    private double doacao;
+    private Double doacao;
 
     public Produto(){}
    }

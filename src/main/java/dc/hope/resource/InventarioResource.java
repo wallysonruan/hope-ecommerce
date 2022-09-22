@@ -35,7 +35,7 @@ public class InventarioResource {
        }
     
     @GetMapping(path="buscar")
-    public Inventario buscaInventario(@RequestBody ChaveProdutoPedido chave){
+    public Inventario buscaInventario(@RequestBody @Valid ChaveProdutoPedido chave){
         
         return inventarioService.findById(chave);
     }    

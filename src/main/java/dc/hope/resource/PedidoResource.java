@@ -36,13 +36,13 @@ public class PedidoResource {
     return pedidoService.findAllById();
   }
 
-  @GetMapping(value="buscar/{idPedido}")
-  public Pedido buscaPedidos(@PathVariable @Valid Long idPedido){
+  @GetMapping(value="/{idPedido}")
+  public Pedido buscarPorId(@PathVariable @Valid Long idPedido){
     return pedidoService.findById(idPedido);
   }
 
   @PatchMapping(value="fechar/{idPedido}")
-  public String fecharpedido(@PathVariable @Valid Long idPedido){
+  public String fecharPedido(@PathVariable @Valid Long idPedido){
     return pedidoService.fecharPedido(idPedido);
   }
 

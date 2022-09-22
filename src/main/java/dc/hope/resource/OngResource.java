@@ -57,5 +57,10 @@ public class OngResource {
         return ongService.atualizarOng(id, ongUpdateRequest);
     }
 
+    @GetMapping(path = "{id}")
+    public Ong buscarPorId(@PathVariable @Valid Long id){
+        Ong ong = ongService.findById(id);
+        return ong;
+    }
     
 }

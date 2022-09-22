@@ -69,7 +69,7 @@ public class PedidoService {
             ChaveProdutoPedido chave = new ChaveProdutoPedido(pedido.getId(), produto.getId());
             mensagem.add("Item: "+produto.getNome());
             mensagem.add("Preço unitário: "+produto.getPreco());
-            mensagem.add("Valor unitário convertido em doação: "+produto.getDoacao());
+            mensagem.add("Valor unitário convertido em doação: "+produto.getDoacao() * produto.getPreco());
             mensagem.add("Quantidade: "+inventarioRepository.findById(chave).get().getQuantidade());
         }
         mensagem.add("O valor total do seu pedido é: "+pedido.getValor_total());

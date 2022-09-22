@@ -65,6 +65,11 @@ public class ProdutoResource {
         return produto;
     }
 
+    @GetMapping(path = "{id}")
+    public Produto buscarPorId(@PathVariable @Valid Long id){
+        Produto produto = produtoService.findById(id);
+        return produto;
+    }
     
 
 
